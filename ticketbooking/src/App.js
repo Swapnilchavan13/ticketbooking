@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { BookingSystem } from './Components/BookingSystem';
-import { BookingDetails } from './Components/BookingDeatils';
+// import { BookingSystem } from './Components/BookingSystem';
+// import { BookingDetails } from './Components/BookingDeatils';
+import { SendMessages } from './Components/SendMessage'
 
 
 function App() {
@@ -10,8 +11,10 @@ function App() {
       <h1>Ticket Booking System</h1>
       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<BookingSystem />} />
-        <Route path="/details" element={<BookingDetails />}/>
+      <Route path="/" element={<SendMessages />} />
+
+        {/* <Route path="/" element={<BookingSystem />} /> */}
+        {/* <Route path="/details" element={<BookingDetails />}/> */}
       </Routes>
     </BrowserRouter>
     </div>
