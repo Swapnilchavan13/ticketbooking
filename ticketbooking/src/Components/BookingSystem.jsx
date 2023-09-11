@@ -46,7 +46,7 @@ export const BookingSystem = () => {
       totalAmount: calculateTotalPrice(),
     };
     localStorage.setItem('bookingData', JSON.stringify(dataToStore));
-  }, []);
+  }, [selectedSeats]);
 
   const handleSeatSelect = (seatNumber) => {
     if (selectedSeats.includes(seatNumber)) {

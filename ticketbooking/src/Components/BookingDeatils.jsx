@@ -18,7 +18,7 @@ export const BookingDetails = () => {
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
     setBookedSeats(storedBookedSeats);
-  }, []);
+  });
 
   // Function to check if a seat is booked
   const isSeatBooked = (seatNumber) => {
