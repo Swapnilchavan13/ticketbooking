@@ -1,20 +1,20 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { BookingSystem } from './Components/BookingSystem';
-// import { BookingDetails } from './Components/BookingDeatils';
-import { SendMessages } from './Components/SendMessage'
+import { BookingSystem } from './Components/BookingSystem';
+import { BookingDetails } from './Components/BookingDeatils';
+import { Notification } from './Components/Notification';
 
 
 function App() {
+
   return (
     <div className="App">
-      <h1>Ticket Booking System</h1>
+      {/* <h1>Ticket Booking System</h1> */}
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<SendMessages />} />
-
-        {/* <Route path="/" element={<BookingSystem />} /> */}
-        {/* <Route path="/details" element={<BookingDetails />}/> */}
+        <Route path="/" element={<BookingSystem />} />
+        <Route path="/notifiaction" element={<Notification />} />
+        <Route path="/details" element={<BookingDetails />}/>
       </Routes>
     </BrowserRouter>
     </div>
