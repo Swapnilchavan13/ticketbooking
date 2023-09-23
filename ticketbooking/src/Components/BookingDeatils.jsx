@@ -51,7 +51,7 @@ export const BookingDetails = () => {
     localStorage.setItem('bookedSeats', JSON.stringify(updatedBookedSeats));
 
     alert('Tickets Booked');
-    navigate('/');
+    navigate('/notification');
   };
 
   return (
