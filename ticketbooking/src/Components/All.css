@@ -52,7 +52,7 @@ width: 40px;
 
   .book{
     background-color: grey;
-    width: 3.5%;
+    width: 50px;
     height: 40px;
     border: 1px solid black;
     border-radius: 10px;
@@ -60,7 +60,7 @@ width: 40px;
   }
   .available{
     color: transparent;
-    width: 3.5%;
+    width: 50px;
     height: 40px;
     border: 1px solid black;
     border-radius: 10px;
@@ -73,3 +73,5 @@ width: 40px;
     width: fit-content;
     padding: 20px;
   }
+
+  

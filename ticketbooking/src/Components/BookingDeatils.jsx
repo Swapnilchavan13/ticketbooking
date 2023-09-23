@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const BookingDetails = () => {
@@ -18,7 +19,7 @@ export const BookingDetails = () => {
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
     setBookedSeats(storedBookedSeats);
-  });
+  },[]);
 
   // Function to check if a seat is booked
   const isSeatBooked = (seatNumber) => {
@@ -39,10 +40,17 @@ export const BookingDetails = () => {
     setIsMobileNumberValid(validateMobileNumber(newMobileNumber));
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!isMobileNumberValid) {
       alert('Please enter a valid mobile number.');
+      return
     }
+
+    try {
+      // Send a POST request to your backend to book the tickets
+      await axios.post('http://localhost:5000/book-seats', {
+        selectedSeats,
+      });
 
     // Handle payment logic here (e.g., redirect to a payment gateway).
 
@@ -52,7 +60,13 @@ export const BookingDetails = () => {
 
     alert('Tickets Booked');
     navigate('/notification');
-  };
+  }
+  catch (error) {
+    console.error('Error booking tickets:', error);
+    alert('Failed to book tickets. Please try again later.');
+  }
+};
+
 
   return (
     <div className="booking-details">

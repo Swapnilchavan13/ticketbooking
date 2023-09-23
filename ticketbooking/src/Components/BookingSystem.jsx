@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './All.css';
 
 const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
@@ -33,11 +34,23 @@ export const BookingSystem = () => {
     setSelectedSeats(storedData.selectedSeats || []);
   }, []);
 
-  // Load booked seats from localStorage on component mount
-  useEffect(() => {
-    const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
-    setBookedSeats(storedBookedSeats);
-  }, []);
+ // Function to fetch booked seats from the API
+ const fetchBookedSeatsFromAPI = async () => {
+  try {
+    const response = await axios.get('http://localhost:5000/booked-seats');
+    const data = response.data;
+    // setBookedSeats(data.bookedSeats.map((seat) => seat.seatNumber));
+    setBookedSeats(data.bookedSeats)
+  } catch (error) {
+    console.error('Failed to fetch booked seats from the API:', error);
+  }
+};
+
+ // Call the function to fetch booked seats from the API on component mount
+ useEffect(() => {
+  fetchBookedSeatsFromAPI();
+}, []);
+
 
   // Update localStorage whenever selected seats change
   useEffect(() => {
@@ -83,7 +96,7 @@ export const BookingSystem = () => {
         <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
         <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
       </div>
-      <Link to="/details">
+       <Link to="/details">
         <button>Book Tickets</button>
       </Link>
     </div>
