@@ -9,7 +9,7 @@ export const BookingDetails = () => {
   const [bookedSeats, setBookedSeats] = useState([]);
   const [mobileNumber, setMobileNumber] = useState('');
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
-
+  const [tid, setTid] = useState('');
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
@@ -65,6 +65,7 @@ export const BookingDetails = () => {
     console.error('Error booking tickets:', error);
     alert('Failed to book tickets. Please try again later.');
   }
+  console.log(tid)
 };
 
   return (
@@ -95,10 +96,13 @@ export const BookingDetails = () => {
         </h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
+      <h2>Scan And Pay The Amount</h2>
       <img className='qr' src={"qrcode.jpg"} alt="img" />
       <br />
+      <input placeholder='Enter 12 Digit Of ID' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
+      <br />
       <button onClick={handlePayment} disabled={!isMobileNumberValid}>
-        Proceed to Payment
+        Enter UPI Reference Number
       </button>
     </div>
   );

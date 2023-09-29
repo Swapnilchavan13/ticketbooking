@@ -47,6 +47,7 @@ export const Notification = () => {
         console.error(error);
         alert('An error occurred while sending the SMS');
       });
+      
   };
 
   return (
@@ -61,7 +62,6 @@ export const Notification = () => {
         />
       </label>
       <br />
-      {/* <p>{message}</p> */}
       <br />
       <button onClick={handleSendSMS}>Send Confirm Tickets</button>
     </div>
