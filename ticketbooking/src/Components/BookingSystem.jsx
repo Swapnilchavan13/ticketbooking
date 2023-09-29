@@ -37,7 +37,7 @@ export const BookingSystem = () => {
  // Function to fetch booked seats from the API
  const fetchBookedSeatsFromAPI = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/booked-seats');
+    const response = await axios.get('http://62.72.59.146:5000/booked-seats');
     const data = response.data;
     // setBookedSeats(data.bookedSeats.map((seat) => seat.seatNumber));
     setBookedSeats(data.bookedSeats)

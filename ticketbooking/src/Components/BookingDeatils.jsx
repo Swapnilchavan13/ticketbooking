@@ -48,7 +48,7 @@ export const BookingDetails = () => {
 
     try {
       // Send a POST request to your backend to book the tickets
-      await axios.post('http://localhost:5000/book-seats', {
+      await axios.post('http://62.72.59.146:5000/book-seats', {
         selectedSeats,
       });
 
@@ -95,7 +95,8 @@ export const BookingDetails = () => {
         </h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
-      <img src="./Qrcode/qrcode.jpeg" alt="img" />
+      <img className='qr' src={"qrcode.jpg"} alt="img" />
+      <br />
       <button onClick={handlePayment} disabled={!isMobileNumberValid}>
         Proceed to Payment
       </button>
