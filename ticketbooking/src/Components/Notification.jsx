@@ -48,6 +48,7 @@ export const Notification = () => {
         alert('An error occurred while sending the SMS');
       });
       
+      
   };
 
   return (
