@@ -43,7 +43,7 @@ export const Notification = () => {
     //     } else {
     //       alert('Failed to send SMS');
     //     }
-    //     navigate('/')
+        navigate('/')
     //   })
     //   .catch((error) => {
     //     console.error(error);
