@@ -67,7 +67,6 @@ export const BookingDetails = () => {
   }
 };
 
-
   return (
     <div className="booking-details">
       <h2>Booking Details</h2>
@@ -84,7 +83,7 @@ export const BookingDetails = () => {
         />
         <h3>Movie Name: Jawan</h3>
         <h4>
-          Selected Seats:{' '}
+          Selected  Seats:{' '}
           {selectedSeats.map((seatNumber) => (
             <span
               key={seatNumber}
@@ -96,6 +95,7 @@ export const BookingDetails = () => {
         </h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
+      <img src="./Qrcode/qrcode.jpeg" alt="img" />
       <button onClick={handlePayment} disabled={!isMobileNumberValid}>
         Proceed to Payment
       </button>

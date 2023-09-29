@@ -9,7 +9,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <h1>Ticket Booking System</h1> */}
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<BookingSystem />} />

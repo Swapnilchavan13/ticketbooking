@@ -29,7 +29,7 @@ export const Notification = () => {
   // Generate the message with seat numbers and total amount
   useEffect(() => {
     const selectedSeatNumbers = selectedSeats.join(', '); // Convert selected seats to a comma-separated string
-    setMessage(`Hello Sir/Madam,\n\nWe're excited to confirm your booking for the following seats:\n${selectedSeatNumbers}\n\nYour total amount is Rs. ${totalAmount}.\n\nThank you for choosing CINEMASS! We look forward to welcoming you to the event. If you have any questions or need assistance, feel free to reply to this message or contact our customer support.\n\nEnjoy the show!\n\nBest regards, Cinemass`);
+    setMessage(`Hello Sir/Madam,\n\nWe're excited to confirm your booking for the following seats:\n${selectedSeatNumbers}\n\nYour total amount is Rs. ${totalAmount}.\n\nThank you for choosing CINEMASS!`);
   }, [selectedSeats, totalAmount]);
 
   const handleSendSMS = () => {
