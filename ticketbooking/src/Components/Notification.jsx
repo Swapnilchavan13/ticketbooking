@@ -34,7 +34,7 @@ export const Notification = () => {
 
   const handleSendSMS = () => {
     axios
-      .post('http://localhost:5000/api/send-sms', { to: phoneNumber, body: message })
+      .post('http://62.72.59.146:5000/api/send-sms', { to: phoneNumber, body: message })
       .then((response) => {
         if (response.data.success) {
           alert('Tickets sent successfully');
