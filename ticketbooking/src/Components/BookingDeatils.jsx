@@ -72,16 +72,6 @@ export const BookingDetails = () => {
     <div className="booking-details">
       <h2>Booking Details</h2>
       <div>
-        <h4 htmlFor="mobileNumber">Mobile Number</h4>
-        <input
-          type="tel"
-          placeholder="Enter Mobile Number"
-          name="mobileNumber"
-          id="mobileNumber"
-          value={mobileNumber}
-          onChange={handleMobileNumberChange}
-          required
-        />
         <h3>Movie Name: Jawan</h3>
         <h4>
           Selected  Seats:{' '}
@@ -99,7 +89,18 @@ export const BookingDetails = () => {
       <h2>Scan And Pay The Amount</h2>
       <img className='qr' src={"qrcode.jpg"} alt="img" />
       <br />
-      <input placeholder='Enter 12 Digit Of ID' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
+      <h4 htmlFor="mobileNumber">Mobile Number</h4>
+        <input
+          type="tel"
+          placeholder="Enter Mobile Number"
+          name="mobileNumber"
+          id="mobileNumber"
+          value={mobileNumber}
+          onChange={handleMobileNumberChange}
+          required
+        />
+      <h4 htmlFor="mobileNumber">Enter UPI Ref Number</h4>
+      <input placeholder='Enter 12 Digit UPI Ref No.' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
       <br />
       <button onClick={handlePayment} disabled={!isMobileNumberValid}>
         Enter UPI Reference Number

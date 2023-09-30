@@ -15,7 +15,6 @@ export const Notification = () => {
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
-
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
     setBookedSeats(storedBookedSeats);
@@ -29,28 +28,29 @@ export const Notification = () => {
   // Generate the message with seat numbers and total amount
   useEffect(() => {
     const selectedSeatNumbers = selectedSeats.join(', '); // Convert selected seats to a comma-separated string
-    setMessage(`Hello Sir/Madam,\n\nWe're excited to confirm your booking for the following seats: ${selectedSeatNumbers}\n\nYour total amount is Rs. ${totalAmount}.\n\nThank you for choosing CINEMASS!`);
+    setMessage(`Hello Sir/Madam, We're excited to confirm your booking for the following seats: ${selectedSeatNumbers} Your total amount is Rs. ${totalAmount}. Thank you for choosing CINEMASS!`);
+
   }, [selectedSeats, totalAmount]);
 
   const handleSendSMS = () => {
 
     alert(`Hello Sir/Madam, We're excited to confirm your booking for the following seats: ${selectedSeats} Your total amount is Rs. ${totalAmount}.Thank you for choosing CINEMASS!`)
     // axios
-    //   .post('http://62.72.59.146:5000/send-sms', { to: phoneNumber, body: message })
+    //   .post('http://localhost:5000/api/send-sms', { to: phoneNumber, body: message })
     //   .then((response) => {
     //     if (response.data.success) {
     //       alert('Tickets sent successfully');
     //     } else {
     //       alert('Failed to send SMS');
     //     }
+
         navigate('/')
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     alert('An error occurred while sending the SMS');
-    //   });
-      
-      
+
+      // })
+      // .catch((error) => {
+      //   console.error(error);
+      //   alert('An error occurred while sending the SMS');
+      // });
   };
 
   return (
