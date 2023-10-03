@@ -35,22 +35,22 @@ export const Notification = () => {
   const handleSendSMS = () => {
 
     alert(`Hello Sir/Madam, We're excited to confirm your booking for the following seats: ${selectedSeats} Your total amount is Rs. ${totalAmount}.Thank you for choosing CINEMASS!`)
-    axios
-      .post('http://localhost:5000/api/send-sms', { to: phoneNumber, body: message })
-      .then((response) => {
-        if (response.data.success) {
-          alert('Tickets sent successfully');
-        } else {
-          alert('Failed to send SMS');
-        }
+    // axios
+    //   .post('http://localhost:5000/api/send-sms', { to: phoneNumber, body: message })
+    //   .then((response) => {
+    //     if (response.data.success) {
+    //       alert('Tickets sent successfully');
+    //     } else {
+    //       alert('Failed to send SMS');
+    //     }
 
         navigate('/')
 
-      })
-      .catch((error) => {
-        console.error(error);
-        alert('An error occurred while sending the SMS');
-      });
+      // })
+      // .catch((error) => {
+      //   console.error(error);
+      //   alert('An error occurred while sending the SMS');
+      // });
   };
 
   return (

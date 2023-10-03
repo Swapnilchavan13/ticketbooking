@@ -114,22 +114,22 @@ export const Report = () => {
     <div>
     <tr>
         <th>NET COLLECTION</th>
-        <td></td>
+        <td>Rs.</td>
     </tr>
     <tr>
         <th>REP CHARGE</th>
-        <td></td>
+        <td>Rs.</td>
     </tr>
     <tr>
         <th>SHOW TAX</th>
-        <td></td>
+        <td>Rs.</td>
     </tr>
     <tr>
         <th>AFTER DEC</th>
-        <td></td>
+        <td>Rs.</td>
     </tr>
     </div>
-        </div>
+  </div>
     </div>
   )
 }
