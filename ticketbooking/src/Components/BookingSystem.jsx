@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './All.css';
 
@@ -20,6 +20,7 @@ const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
 };
 
 export const BookingSystem = () => {
+  const navigate = useNavigate();
   const seatPrice = 100; // Price per seat
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
@@ -34,23 +35,21 @@ export const BookingSystem = () => {
     setSelectedSeats(storedData.selectedSeats || []);
   }, []);
 
- // Function to fetch booked seats from the API
- const fetchBookedSeatsFromAPI = async () => {
-  try {
-    const response = await axios.get('http://62.72.59.146:5000/booked-seats');
-    const data = response.data;
-    // setBookedSeats(data.bookedSeats.map((seat) => seat.seatNumber));
-    setBookedSeats(data.bookedSeats)
-  } catch (error) {
-    console.error('Failed to fetch booked seats from the API:', error);
-  }
-};
+  // Function to fetch booked seats from the API
+  const fetchBookedSeatsFromAPI = async () => {
+    try {
+      const response = await axios.get('http://62.72.59.146:5000/booked-seats');
+      const data = response.data;
+      setBookedSeats(data.bookedSeats);
+    } catch (error) {
+      console.error('Failed to fetch booked seats from the API:', error);
+    }
+  };
 
- // Call the function to fetch booked seats from the API on component mount
- useEffect(() => {
-  fetchBookedSeatsFromAPI();
-}, []);
-
+  // Call the function to fetch booked seats from the API on component mount
+  useEffect(() => {
+    fetchBookedSeatsFromAPI();
+  }, []);
 
   // Update localStorage whenever selected seats change
   useEffect(() => {
@@ -69,11 +68,18 @@ export const BookingSystem = () => {
     }
   };
 
+  const BookTicket = () => {
+    // Only navigate to details if at least one seat is selected
+    if (selectedSeats.length > 0) {
+      navigate('/details');
+    }
+  };
+
   return (
     <div className="booking-system">
       <img src="https://mir-s3-cdn-cf.behance.net/projects/404/301949145315591.Y3JvcCwzNjczLDI4NzIsMzE4LDU4MQ.jpg" alt="" />
-      <h2 className="screen">Screen</h2><br />
-      <h2>Movie Name : Jawan</h2><br />
+      <h2 className="screen">Screen</h2>
+      <h2>Movie Name: Jawan</h2>
       <div className="seats">
         {[...Array(26).keys()].map((seatNumber) => (
           <Seat
@@ -96,9 +102,9 @@ export const BookingSystem = () => {
         <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
         <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
       </div>
-       <Link to="/details">
-        <button>Book Tickets</button>
-      </Link>
+      <button onClick={BookTicket} disabled={selectedSeats.length === 0}>
+        Book Tickets
+      </button>
     </div>
   );
 };

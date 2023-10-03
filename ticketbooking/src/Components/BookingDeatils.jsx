@@ -10,6 +10,7 @@ export const BookingDetails = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
   const [tid, setTid] = useState('');
+  
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
