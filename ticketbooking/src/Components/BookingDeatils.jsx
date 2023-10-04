@@ -49,13 +49,14 @@ export const BookingDetails = () => {
   
     // Check if the selected date is Friday
     const selectedDate = new Date(localStorage.getItem('selectedDate'));
-    if (selectedDate.getDay() !== 5) { // 5 corresponds to Friday (0 is Sunday, 1 is Monday, and so on)
-      alert('You can only book tickets for Friday.');
-      return;
-    }
+    // if (selectedDate.getDay() !== 5) { // 5 corresponds to Friday (0 is Sunday, 1 is Monday, and so on)
+    //   alert('You can only book tickets for Friday.');
+    //   return;
+    // }
   
     // Extract the day from the selectedDate
-    const day = selectedDate.toLocaleDateString('en-US', { weekday: 'lowercase' });
+    const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+
   
     try {
       // Send a POST request to your backend with the selected date
