@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const BookingDetails = () => {
+
   const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -49,7 +50,7 @@ export const BookingDetails = () => {
 
     try {
       // Send a POST request to your backend to book the tickets
-      await axios.post('http://62.72.59.146:5000/book-seats', {
+      await axios.post('http://62.72.59.146:8000/book-seats', {
         selectedSeats,
       });
 
