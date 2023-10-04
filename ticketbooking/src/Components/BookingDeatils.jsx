@@ -44,30 +44,29 @@ export const BookingDetails = () => {
   const handlePayment = async () => {
     if (!isMobileNumberValid) {
       alert('Please enter a valid mobile number.');
-      return
+      return;
     }
-
+  
     try {
       // Send a POST request to your backend to book the tickets
-      await axios.post('http://62.72.59.146:5000/bookedseats', {
-        selectedSeats,
+      await axios.post('http://62.72.59.146:3000/bookedseats', {
+        seatNumbers: selectedSeats, // Send selectedSeats as an array
       });
-
-    // Handle payment logic here (e.g., redirect to a payment gateway).
-
-    // Update booked seats in localStorage
-    const updatedBookedSeats = [...bookedSeats, ...selectedSeats];
-    localStorage.setItem('bookedSeats', JSON.stringify(updatedBookedSeats));
-
-    alert('Tickets Booked');
-    navigate('/notification');
-  }
-  catch (error) {
-    console.error('Error booking tickets:', error);
-    alert('Failed to book tickets. Please try again later.');
-  }
-  console.log(tid)
-};
+  
+      // Handle payment logic here (e.g., redirect to a payment gateway).
+  
+      // Update booked seats in localStorage
+      const updatedBookedSeats = [...bookedSeats, ...selectedSeats];
+      localStorage.setItem('bookedSeats', JSON.stringify(updatedBookedSeats));
+  
+      alert('Tickets Booked');
+      navigate('/notification');
+    } catch (error) {
+      console.error('Error booking tickets:', error);
+      alert('Failed to book tickets. Please try again later.');
+    }
+    console.log(tid);
+  };
 
   return (
     <div className="booking-details">
