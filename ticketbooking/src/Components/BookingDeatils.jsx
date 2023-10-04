@@ -49,7 +49,7 @@ export const BookingDetails = () => {
 
     try {
       // Send a POST request to your backend to book the tickets
-      await axios.post('http://62.72.59.146:5000/book-seats', {
+      await axios.post('http://62.72.59.146:5000/bookedseats', {
         selectedSeats,
       });
 
