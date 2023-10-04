@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './All.css';
 
 const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
-const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 'seat';
+  const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 'seat';
 
   const handleClick = () => {
     if (!isBooked) {
@@ -29,63 +30,64 @@ export const BookingSystem = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().slice(0, 10)
-  );  const [bookedSeats, setBookedSeats] = useState([]);
+  );
+  const [bookedSeats, setBookedSeats] = useState([]);
   const [isFriday, setIsFriday] = useState(false); // Add state variable to track if it's Friday
 
   const calculateTotalPrice = () => {
     return selectedSeats.length * seatPrice;
   };
 
-  // Function to fetch booked seats from the API
-  const fetchBookedSeatsFromAPI = async () => {
+  // Function to fetch booked seats for the selected day
+  const fetchBookedSeatsForSelectedDay = async () => {
     try {
-      const response = await axios.get('http://62.72.59.146:5000/booked-seats');
+      const response = await axios.get(`http://62.72.59.146:5000/seats/${selectedDate}`);
       const data = response.data;
-      setBookedSeats(data.bookedSeats);
+      setBookedSeats(data);
     } catch (error) {
-      console.error('Failed to fetch booked seats from the API:', error);
+      console.error('Failed to fetch booked seats for the selected day:', error);
     }
   };
 
-  // Call the function to fetch booked seats from the API on component mount
+  // Call the function to fetch booked seats whenever selectedDate changes
   useEffect(() => {
-    fetchBookedSeatsFromAPI();
-  }, []);
-
-  // Update localStorage whenever selected seats or date change
-  useEffect(() => {
-    const dataToStore = {
-      selectedSeats,
-      selectedDate,
-      totalAmount: calculateTotalPrice(),
-    };
-    localStorage.setItem('bookingData', JSON.stringify(dataToStore));
-  }, [selectedSeats, selectedDate]);
-
-  // Check if the selected date is a Friday
-  useEffect(() => {
-    if (selectedDate) {
-      const date = new Date(selectedDate);
-      setIsFriday(date.getDay() === 5); // 5 represents Friday
-    }
-    localStorage.setItem('selectedDate', JSON.stringify(selectedDate))
+    fetchBookedSeatsForSelectedDay();
   }, [selectedDate]);
-  // console.log(selectedDate)
 
-  const handleSeatSelect = (seatNumber) => {
-    if (selectedSeats.includes(seatNumber)) {
-      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
-    } else {
-      setSelectedSeats([...selectedSeats, seatNumber]);
-    }
-  };
-
-  const BookTicket = () => {
-    // Only navigate to details if at least one seat is selected
-    if (selectedSeats.length > 0) {
-      navigate('/details');
+    // Update localStorage whenever selected seats or date change
+    useEffect(() => {
+      const dataToStore = {
+        selectedSeats,
+        selectedDate,
+        totalAmount: calculateTotalPrice(),
+      };
+      localStorage.setItem('bookingData', JSON.stringify(dataToStore));
+    }, [selectedSeats, selectedDate]);
+  
+    // Check if the selected date is a Friday
+    useEffect(() => {
+      if (selectedDate) {
+        const date = new Date(selectedDate);
+        setIsFriday(date.getDay() === 5); // 5 represents Friday
+      }
+      localStorage.setItem('selectedDate', JSON.stringify(selectedDate))
+    }, [selectedDate]);
+    // console.log(selectedDate)
+  
+    const handleSeatSelect = (seatNumber) => {
+      if (selectedSeats.includes(seatNumber)) {
+        setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+      } else {
+        setSelectedSeats([...selectedSeats, seatNumber]);
+      }
     };
-  }
+  
+    const BookTicket = () => {
+      // Only navigate to details if at least one seat is selected
+      if (selectedSeats.length > 0) {
+        navigate('/details');
+      };
+    }
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
