@@ -8,7 +8,7 @@ export const Report = () => {
      // Function to fetch booked seats from the API
   const fetchBookedSeatsFromAPI = async () => {
     try {
-      const response = await axios.get('http://62.72.59.146:5000/booked-seats');
+      const response = await axios.get('http://62.72.59.146:8000/booked-seats');
       const data = response.data;
       console.log(data.bookedSeats.length)
       setBookedseatslength(data.bookedSeats.length);
