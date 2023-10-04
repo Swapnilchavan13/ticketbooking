@@ -36,7 +36,7 @@ export const Notification = () => {
 
     alert(`Hello Sir/Madam, We're excited to confirm your booking for the following seats: ${selectedSeats} Your total amount is Rs. ${totalAmount}.Thank you for choosing CINEMASS!`)
     axios
-      .post('http://localhost:8000/api/send-sms', { to: phoneNumber, body: message })
+      .post('http://62.72.59.146:8000/api/send-sms', { to: phoneNumber, body: message })
       .then((response) => {
         if (response.data.success) {
           alert('Tickets sent successfully');
