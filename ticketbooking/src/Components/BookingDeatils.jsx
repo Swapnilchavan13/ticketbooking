@@ -44,26 +44,36 @@ export const BookingDetails = () => {
   const handlePayment = async () => {
     if (!isMobileNumberValid) {
       alert('Please enter a valid mobile number.');
-      return
+      return;
     }
-
+  
+    // Check if the selected date is Friday
+    const selectedDate = new Date(localStorage.getItem('selectedDate'));
+    if (selectedDate.getDay() !== 5) { // 5 corresponds to Friday (0 is Sunday, 1 is Monday, and so on)
+      alert('You can only book tickets for Friday.');
+      return;
+    }
+  
+    // Extract the day from the selectedDate
+    const day = selectedDate.toLocaleDateString('en-US', { weekday: 'lowercase' });
+  
     try {
-      // Send a POST request to your backend to book the tickets
-      await axios.post('http://62.72.59.146:5000/book-seats', {
+      // Send a POST request to your backend with the selected date
+      await axios.post(`http://62.72.59.146:5000/seats/${day}`, {
         selectedSeats,
       });
-
-    // Handle payment logic here (e.g., redirect to a payment gateway).
-
-    alert('Tickets Booked');
-    navigate('/notification');
-  }
-  catch (error) {
-    console.error('Error booking tickets:', error);
-    alert('Failed to book tickets. Please try again later.');
-  }
-  console.log(tid)
-};
+  
+      // Handle payment logic here (e.g., redirect to a payment gateway).
+  
+      alert('Tickets Booked');
+      navigate('/notification');
+    } catch (error) {
+      console.error('Error booking tickets:', error);
+      alert('Failed to book tickets. Please try again later.');
+    }
+  };
+  
+  
 
   return (
     <div className="booking-details">
