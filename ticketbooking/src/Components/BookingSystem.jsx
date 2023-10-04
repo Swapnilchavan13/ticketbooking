@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -28,66 +27,53 @@ export const BookingSystem = () => {
   const navigate = useNavigate();
   const seatPrice = 100;
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
   const [bookedSeats, setBookedSeats] = useState([]);
-  const [isFriday, setIsFriday] = useState(false); // Add state variable to track if it's Friday
+  const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
 
   const calculateTotalPrice = () => {
     return selectedSeats.length * seatPrice;
   };
 
-  // Function to fetch booked seats for the selected day
-  const fetchBookedSeatsForSelectedDay = async () => {
+  // Function to fetch booked seats from the API
+  const fetchBookedSeatsFromAPI = async () => {
     try {
-      const response = await axios.get(`http://62.72.59.146:5000/seats/${selectedDate}`);
+      const response = await axios.get('http://62.72.59.146:5000/booked-seats');
       const data = response.data;
-      setBookedSeats(data);
+      setBookedSeats(data.bookedSeats);
     } catch (error) {
-      console.error('Failed to fetch booked seats for the selected day:', error);
+      console.error('Failed to fetch booked seats from the API:', error);
     }
   };
 
-  // Call the function to fetch booked seats whenever selectedDate changes
+  // Call the function to fetch booked seats from the API on component mount
   useEffect(() => {
-    fetchBookedSeatsForSelectedDay();
-  }, [selectedDate]);
+    fetchBookedSeatsFromAPI();
+  }, []);
 
-    // Update localStorage whenever selected seats or date change
-    useEffect(() => {
-      const dataToStore = {
-        selectedSeats,
-        selectedDate,
-        totalAmount: calculateTotalPrice(),
-      };
-      localStorage.setItem('bookingData', JSON.stringify(dataToStore));
-    }, [selectedSeats, selectedDate]);
-  
-    // Check if the selected date is a Friday
-    useEffect(() => {
-      if (selectedDate) {
-        const date = new Date(selectedDate);
-        setIsFriday(date.getDay() === 5); // 5 represents Friday
-      }
-      localStorage.setItem('selectedDate', JSON.stringify(selectedDate))
-    }, [selectedDate]);
-    // console.log(selectedDate)
-  
-    const handleSeatSelect = (seatNumber) => {
-      if (selectedSeats.includes(seatNumber)) {
-        setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
-      } else {
-        setSelectedSeats([...selectedSeats, seatNumber]);
-      }
+  // Update localStorage whenever selected seats or date change
+  useEffect(() => {
+    const dataToStore = {
+      selectedSeats,
+      selectedDate, // Include selectedDate in localStorage
+      totalAmount: calculateTotalPrice(),
     };
-  
-    const BookTicket = () => {
-      // Only navigate to details if at least one seat is selected
-      if (selectedSeats.length > 0) {
-        navigate('/details');
-      };
+    localStorage.setItem('bookingData', JSON.stringify(dataToStore));
+  }, [selectedSeats, selectedDate]); // Listen to selectedSeats and selectedDate
+
+  const handleSeatSelect = (seatNumber) => {
+    if (selectedSeats.includes(seatNumber)) {
+      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+    } else {
+      setSelectedSeats([...selectedSeats, seatNumber]);
     }
+  };
+
+  const BookTicket = () => {
+    // Only navigate to details if at least one seat is selected
+    if (selectedSeats.length > 0) {
+      navigate('/details');
+    }
+  };
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -118,27 +104,24 @@ export const BookingSystem = () => {
         </div>
       )}
 
-      {/* Conditionally display booked seats or all seats as available */}
       <div className="seats">
         {[...Array(26).keys()].map((seatNumber) => (
           <Seat
             key={seatNumber}
             seatNumber={seatNumber + 1}
             isSelected={selectedSeats.includes(seatNumber + 1)}
-            isBooked={isFriday ? bookedSeats.includes(seatNumber + 1) : false}
+            isBooked={bookedSeats.includes(seatNumber + 1)}
             onSelect={handleSeatSelect}
             price={seatPrice}
           />
         ))}
       </div>
-
       <div>
         <label htmlFor="">Booked Seats</label>
         <div className='book'></div>
         <label htmlFor="">Available Seats</label>
         <div className='available'></div>
       </div>
-
       <div className="selected-seats">
         <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
         <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
