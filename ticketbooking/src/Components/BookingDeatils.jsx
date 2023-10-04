@@ -55,10 +55,6 @@ export const BookingDetails = () => {
 
     // Handle payment logic here (e.g., redirect to a payment gateway).
 
-    // Update booked seats in localStorage
-    const updatedBookedSeats = [...bookedSeats, ...selectedSeats];
-    localStorage.setItem('bookedSeats', JSON.stringify(updatedBookedSeats));
-
     alert('Tickets Booked');
     navigate('/notification');
   }

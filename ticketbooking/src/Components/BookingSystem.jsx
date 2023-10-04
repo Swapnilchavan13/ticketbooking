@@ -20,6 +20,8 @@ const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
 };
 
 export const BookingSystem = () => {
+  const movie = ["https://m.media-amazon.com/images/M/MV5BMmI4ZGNlYjEtNGNlNS00YjEyLTlmZGYtY2Y4MDUxMWEyMDYzXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg",
+"https://upload.wikimedia.org/wikipedia/en/3/39/Jawan_film_poster.jpg"]
   const navigate = useNavigate();
   const seatPrice = 100; // Price per seat
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -28,12 +30,6 @@ export const BookingSystem = () => {
   const calculateTotalPrice = () => {
     return selectedSeats.length * seatPrice;
   };
-
-  // Load previously selected seats from localStorage on component mount
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
-    setSelectedSeats(storedData.selectedSeats || []);
-  }, []);
 
   // Function to fetch booked seats from the API
   const fetchBookedSeatsFromAPI = async () => {
@@ -77,7 +73,7 @@ export const BookingSystem = () => {
 
   return (
     <div className="booking-system">
-      <img src="https://mir-s3-cdn-cf.behance.net/projects/404/301949145315591.Y3JvcCwzNjczLDI4NzIsMzE4LDU4MQ.jpg" alt="" />
+      <img src={movie[1]} width={"300px"} alt="" />
       <h2 className="screen">Screen</h2>
       <h2>Movie Name: Jawan</h2>
       <div className="seats">
