@@ -52,8 +52,8 @@ export const BookingDetails = () => {
     const selectedDate = new Date(localStorage.getItem('selectedDate'));
     const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
   
-
-    console.log(day)
+    // console.log(day)
+    
     // Define an array of API URLs for each day
     const apiarr = [
       'http://localhost:8000/book-monday',
