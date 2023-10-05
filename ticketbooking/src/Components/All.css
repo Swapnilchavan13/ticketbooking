@@ -1,19 +1,29 @@
 .seats div{
-width: 40px;
- /* border: 1px solid black;  */
+ width: fit-content;
  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; margin: auto;  
  padding: 10px;
  border-radius: 10px;
  cursor: pointer;
+ border: 1px solid black;
 
 }
 .seats{
-    width: 80%;
     margin: auto;
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+    justify-content: center;
 }
+
+.seatindication{
+  width: fit-content;
+  padding-left: 200px;
+}
+
+.column{
+  display: flex;
+  gap: 60px;
+  text-align: center;
+}
+
 .selected {
     background-color: green; /* Background color for selected seats */
   }
@@ -25,6 +35,7 @@ width: 40px;
   button{
     width: auto;
     border-radius: 10px;
+    font-size: 20px;
     color: black;
     background-color: rgb(138, 233, 138);
     padding: 7px;
@@ -45,13 +56,13 @@ width: 40px;
   }
 
   .booked {
-    background-color: grey;
+    background-color: rgb(88, 88, 88);
     color: white; /* You can adjust text color for better visibility */
     cursor: not-allowed; /* Change cursor to not-allowed for disabled seats */
   }
 
   .book{
-    background-color: grey;
+    background-color: rgb(88, 88, 88);
     width: 50px;
     height: 40px;
     border: 1px solid black;

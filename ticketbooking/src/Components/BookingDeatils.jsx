@@ -53,16 +53,16 @@ export const BookingDetails = () => {
     const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
   
     // console.log(day)
-    
+
     // Define an array of API URLs for each day
     const apiarr = [
-      'http://localhost:8000/book-monday',
-      'http://localhost:8000/book-tuesday',
-      'http://localhost:8000/book-wednesday',
-      'http://localhost:8000/book-thursday',
-      'http://localhost:8000/book-friday',
-      'http://localhost:8000/book-saturday',
-      'http://localhost:8000/book-sunday'
+      'http://62.72.59.146:8000/book-monday',
+      'http://62.72.59.146:8000/book-tuesday',
+      'http://62.72.59.146:8000/book-wednesday',
+      'http://62.72.59.146:8000/book-thursday',
+      'http://62.72.59.146:8000/book-friday',
+      'http://62.72.59.146:8000/book-saturday',
+      'http://62.72.59.146:8000/book-sunday'
     ];
   
     // Define a mapping of day names to their corresponding index
@@ -102,7 +102,7 @@ export const BookingDetails = () => {
     <div className="booking-details">
       <h2>Booking Details</h2>
       <div>
-        <h3>Movie Name: Jawan</h3>
+        <h3>Movie Name: Mission Raniganj</h3>
         <h4>
           Selected  Seats:{' '}
           {selectedSeats.map((seatNumber) => (
