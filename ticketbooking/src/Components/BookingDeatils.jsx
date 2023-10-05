@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export const BookingDetails = () => {
-
   const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -11,10 +10,12 @@ export const BookingDetails = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
   const [tid, setTid] = useState('');
+  const [selecteddate, setselecteDate]= useState()
   
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
+    setselecteDate(storedData.selectedDate || '')
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
 
@@ -45,30 +46,57 @@ export const BookingDetails = () => {
   const handlePayment = async () => {
     if (!isMobileNumberValid) {
       alert('Please enter a valid mobile number.');
-      return
+      return;
     }
+  
+    const selectedDate = new Date(localStorage.getItem('selectedDate'));
+    const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+  
 
-    try {
-      // Send a POST request to your backend to book the tickets
-      await axios.post('http://62.72.59.146:8000/book-seats', {
-        selectedSeats,
-      });
-
-    // Handle payment logic here (e.g., redirect to a payment gateway).
-
-    // Update booked seats in localStorage
-    // const updatedBookedSeats = [...bookedSeats, ...selectedSeats];
-    // localStorage.setItem('bookedSeats', JSON.stringify(updatedBookedSeats));
-
-    alert('Tickets Booked');
-    navigate('/notification');
-  }
-  catch (error) {
-    console.error('Error booking tickets:', error);
-    alert('Failed to book tickets. Please try again later.');
-  }
-  console.log(tid)
-};
+    console.log(day)
+    // Define an array of API URLs for each day
+    const apiarr = [
+      'http://localhost:8000/book-monday',
+      'http://localhost:8000/book-tuesday',
+      'http://localhost:8000/book-wednesday',
+      'http://localhost:8000/book-thursday',
+      'http://localhost:8000/book-friday',
+      'http://localhost:8000/book-saturday',
+      'http://localhost:8000/book-sunday'
+    ];
+  
+    // Define a mapping of day names to their corresponding index
+    const dayToIndex = {
+      monday: 0,
+      tuesday: 1,
+      wednesday: 2,
+      thursday: 3,
+      friday: 4,
+      saturday: 5,
+      sunday: 6
+    };
+  
+    // Check if the selected day is in the dayToIndex mapping
+    if (dayToIndex.hasOwnProperty(day)) {
+      const index = dayToIndex[day];
+      
+      try {
+        // Send a POST request to the backend using the selected URL
+        await axios.post(apiarr[index], {
+          selectedSeats,
+        });
+        
+        // Handle payment logic here (e.g., redirect to a payment gateway).
+        alert('Tickets Booked');
+        navigate('/notification');
+      } catch (error) {
+        console.error('Error booking tickets:', error);
+        alert('Failed to book tickets. Please try again later.');
+      }
+    } else {
+      alert('Invalid day selected.');
+    }
+  };
 
   return (
     <div className="booking-details">

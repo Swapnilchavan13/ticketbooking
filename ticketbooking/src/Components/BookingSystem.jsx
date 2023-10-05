@@ -4,7 +4,7 @@ import axios from 'axios';
 import './All.css';
 
 const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
-  const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 'seat';
+const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 'seat';
 
   const handleClick = () => {
     if (!isBooked) {
@@ -30,35 +30,69 @@ export const BookingSystem = () => {
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
 
+  const apiget = [
+    'http://localhost:8000/booked-monday',
+    'http://localhost:8000/booked-tuesday',
+    'http://localhost:8000/booked-wednesday',
+    'http://localhost:8000/booked-thursday',
+    'http://localhost:8000/booked-friday',
+    'http://localhost:8000/booked-saturday',
+    'http://localhost:8000/booked-sunday'
+  ];
+  
+
+ // Function to fetch booked seats from the API based on the selected day
+var dayy = new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
+// console.log(dayy);
+
+const fetchBookedSeatsFromAPI = async (dayy) => {
+  try {
+    // Determine the index corresponding to the selected day
+    const dayToIndex = {
+      monday: 0,
+      tuesday: 1,
+      wednesday: 2,
+      thursday: 3,
+      friday: 4,
+      saturday: 5,
+      sunday: 6
+    };
+
+    if (dayToIndex.hasOwnProperty(dayy)) {
+      const index = dayToIndex[dayy];
+      const response = await axios.get(apiget[index]);
+      const data = response.data;
+      setBookedSeats(data.bookedSeats);
+    } else {
+      alert('Invalid day selected.');
+    }
+  } catch (error) {
+    console.error('Failed to fetch booked seats from the API:', error);
+  }
+};
+  // Call the function to fetch booked seats from the API on component mount
+  useEffect(() => {
+    // Replace 'selectedDay' with the actual selected day from your state
+    fetchBookedSeatsFromAPI(dayy);
+  }, [selectedDate]);
+  
+
+
   const calculateTotalPrice = () => {
     return selectedSeats.length * seatPrice;
   };
-
-  // Function to fetch booked seats from the API
-  const fetchBookedSeatsFromAPI = async () => {
-    try {
-      const response = await axios.get('http://62.72.59.146:8000/booked-seats');
-      const data = response.data;
-      setBookedSeats(data.bookedSeats);
-    } catch (error) {
-      console.error('Failed to fetch booked seats from the API:', error);
-    }
-  };
-
-  // Call the function to fetch booked seats from the API on component mount
-  useEffect(() => {
-    fetchBookedSeatsFromAPI();
-  }, []);
 
   // Update localStorage whenever selected seats or date change
   useEffect(() => {
     const dataToStore = {
       selectedSeats,
-      selectedDate, // Include selectedDate in localStorage
+      // selectedDate, // Include selectedDate in localStorage
       totalAmount: calculateTotalPrice(),
     };
+    localStorage.setItem('selectedDate', JSON.stringify(selectedDate))
     localStorage.setItem('bookingData', JSON.stringify(dataToStore));
-  }, [selectedSeats, selectedDate]); // Listen to selectedSeats and selectedDate
+
+  }, [selectedSeats]); // Listen to selectedSeats and selectedDate
 
   const handleSeatSelect = (seatNumber) => {
     if (selectedSeats.includes(seatNumber)) {
