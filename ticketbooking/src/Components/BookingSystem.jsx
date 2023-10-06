@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import logovideo from '../Components'
 import './All.css';
 
 const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
@@ -75,7 +76,6 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
     // Replace 'selectedDay' with the actual selected day from your state
     fetchBookedSeatsFromAPI(dayy);
   }, [selectedDate]);
-  
 
 
   const calculateTotalPrice = () => {
@@ -115,17 +115,23 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
     const selectedDateObj = new Date(selectedDate);
     const sevenDaysAhead = new Date();
     sevenDaysAhead.setDate(currentDate.getDate() + 6);
-
+  
     if (selectedDateObj >= currentDate && selectedDateObj <= sevenDaysAhead) {
       setSelectedDate(selectedDate);
     } else {
       alert("Please select a date within the next 7 days.");
+      // setSelectedDate(currentDate);
       // You can choose to clear the input field or handle it as per your requirements
     }
   };
+  
 
   return (
     <div className="booking-system">
+      <img style={{borderRadius:'20px'}} src={"logogif.gif"} alt="" />
+      <br />
+      <img src="https://media.istockphoto.com/id/1300788021/vector/box-office-banner-alphabet-sign-marquee-light-bulb-vintage.jpg?s=612x612&w=0&k=20&c=E3RA9XDcx4K9vALeIpL6fF2wqRolNRIBXyi6NNywYko=" alt="" />
+      <br />
       <img src={movie[1]} width={"700px"} alt="" />
       <h2 className="screen">Screen</h2>
       <h2>Movie Name: {moviename[1]}</h2>    
@@ -137,8 +143,6 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
         <label htmlFor="">Available Seats</label>
         <div className='available'></div>
       </div>
-
-
 
 <div className="seats">
   <div className="column">
@@ -187,8 +191,11 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
 </div>
 <br />
 
+<div className='dateandshow'>
+
+<div className='selectdate'>
 <div>
-      <label htmlFor="datePicker">Select a Date:</label>
+      <h4 htmlFor="datePicker">Select a Date</h4>
         <input
           type="date"
           id="datePicker"
@@ -196,20 +203,45 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
           onChange={handleDateChange}
         />
       </div>
-
-      {/* Display selected date and day of the week */}
       {selectedDate && (
         <div>
-          <p>Selected Date: {selectedDate}</p>
+          <h4>Selected Date</h4>
+          <h5>{selectedDate}</h5>
           <h4>Day: {new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" })}</h4>
         </div>
       )}
+
+</div>
+      <div className='selectshow'>
+        <h4>Select Show Time</h4>
+        <div className='showtime'>
+        <input type="radio" />
+        <label>9:00 Am</label>
+        </div>
+        <div className='showtime'>
+        <input type="radio" />
+        <label>12:00 Pm</label>
+        </div>
+        <div className='showtime'>
+        <input type="radio" />
+        <label>3:00 Pm</label>
+        </div>
+        <div className='showtime'>  
+        <input type="radio" />
+        <label>6:00 Pm</label>
+        </div>
+        <div className='showtime'>
+        <input type="radio" />
+        <label>9:00 Pm</label>
+        </div>
+      </div>
       
+      </div>
       <div className="selected-seats">
         <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
         <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
       </div>
-      <button onClick={BookTicket} disabled={selectedSeats.length === 0}>
+      <button className='bookbutton' onClick={BookTicket} disabled={selectedSeats.length === 0}>
         Book Tickets
       </button>
     </div>

@@ -1,125 +1,225 @@
-.seats div{
- width: fit-content;
- box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; margin: auto;  
- padding: 10px;
- border-radius: 10px;
- cursor: pointer;
- border: 1px solid black;
+/* Default styles for larger screens */
 
-}
-.seats{
-    margin: auto;
-    text-align: center;
-    justify-content: center;
+.seats div {
+  width: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid black;
 }
 
-.seatindication{
+.seats {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+}
+
+.seatindication {
   width: fit-content;
   padding-left: 200px;
 }
 
-.column{
+.column {
   display: flex;
   gap: 60px;
   text-align: center;
 }
 
 .selected {
-    background-color: green; /* Background color for selected seats */
-    color: white;
-  }
-  .screen{
-    width: 65%;
+  background-color: green;
+  color: white;
+}
+
+.screen {
+  width: 65%;
+  margin: auto;
+  border: 5px solid rgb(156, 156, 235);
+}
+
+.showtime label{
+  display: inline;
+  margin-left: 5px;
+}
+
+.showtime input[type="radio"] {
+  width: 15px;
+}
+
+button {
+  width: auto;
+  border-radius: 10px;
+  font-size: 20px;
+  color: black;
+  background-color: rgb(138, 233, 138);
+  padding: 7px;
+}
+
+.booking-details {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 30px;
+  width: fit-content;
+  margin: auto;
+}
+
+input {
+  height: 40px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.booked {
+  background-color: rgb(88, 88, 88);
+  color: white;
+  cursor: not-allowed;
+}
+
+.book {
+  background-color: rgb(88, 88, 88);
+  width: 50px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.available {
+  color: transparent;
+  width: 50px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.confirmbox {
+  border: 1px solid black;
+  margin: auto;
+  width: fit-content;
+  padding: 20px;
+}
+
+.qr {
+  height: 300px;
+  width: 400px;
+}
+
+
+.selectdate{
+  border: 1px solid rgb(88, 87, 87);
+  padding: 30px;
+}
+
+.selectshow{
+  border: 1px solid rgb(88, 87, 87);
+  padding: 30px;
+}
+
+.dateandshow{
+  width: fit-content;
+  padding: 50px;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  border: 3px solid black;
+}
+
+
+/* Mobile-responsive styles */
+
+@media screen and (max-width: 400px) {
+
+  .seats {
     margin: auto;
-    border: 5px solid rgb(156, 156, 235);
+    text-align: center;
+    justify-content: center;
+    width: fit-content;
   }
-  button{
+  .seats .column{
+    width: fit-content;
+  }
+
+  .seats div {
+    width: fit-content;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+  }
+
+  .column {
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    gap: 20px;
+  }
+  
+  img{
+    text-align: center;
+    justify-content: center;
+    width: 140%;
+  }
+
+  .seatindication {
+    padding-left: 0;
+  }
+
+  .screen {
+    text-align: center;
+    margin: auto;
+    width: 136%;
+  }
+
+  .selected-seats{
+    width: 137%;
+  }
+
+  .bookbutton {
     width: auto;
     border-radius: 10px;
     font-size: 20px;
     color: black;
     background-color: rgb(138, 233, 138);
     padding: 7px;
+    margin-left: 150px;
   }
 
-  .booking-details{
-    /* border: 1px solid black; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 6px;
+  }
+
+  .selectshow{
+    border: 1px solid rgb(88, 87, 87);
     padding: 30px;
+    width: 145px;
+  }
+  
+  .dateandshow{
     width: fit-content;
+    padding: 50px;
     margin: auto;
-  }
-
-  input{
-    height:40px;
-    font-size: 15px;
+    display: flex;
+    gap: 20px;
+    text-align: center;
+    border: 3px solid black;
     border-radius: 10px;
   }
 
-  .booked {
-    background-color: rgb(88, 88, 88);
-    color: white; /* You can adjust text color for better visibility */
-    cursor: not-allowed; /* Change cursor to not-allowed for disabled seats */
+  .booking-details {
+    padding: 15px;
   }
 
-  .book{
-    background-color: rgb(88, 88, 88);
-    width: 50px;
-    height: 40px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: auto;
+  input {
+    height: 36px;
+    font-size: 14px;
   }
-  .available{
-    color: transparent;
-    width: 50px;
-    height: 40px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: auto;
-  }
-
-  .confirmbox{
-    border: 1px solid black;
-    margin: auto;
-    width: fit-content;
-    padding: 20px;
-  }
-
-  .qr{
-height: 300px;
-    width: 400px;
-  }
-
-
-
-
-  /* //////////////////////////*/
-
-
-  /* Add these styles to your CSS file or component */
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-/* 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-} */
-
-tr:hover {
-  background-color: #ddd;
 }
