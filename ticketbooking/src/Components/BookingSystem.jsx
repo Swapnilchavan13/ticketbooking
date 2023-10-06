@@ -112,6 +112,7 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     const currentDate = new Date();
+    const selectedDateObj = new Date(selectedDate);
     const sevenDaysAhead = new Date();
     sevenDaysAhead.setDate(currentDate.getDate() + 6);
 
@@ -121,7 +122,6 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       alert("Please select a date within the next 7 days.");
       // You can choose to clear the input field or handle it as per your requirements
     }
-    const selectedDateObj = new Date(selectedDate);
   };
 
   return (
