@@ -20,9 +20,9 @@ const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 
 };
 
 export const BookingSystem = () => {
-  const moviename = ["Tiger 3", "Mission Raniganj"];
+  const moviename = ["Tiger 3", "MISSION RANIGANJ"];
   const movie = ["https://m.media-amazon.com/images/M/MV5BMmI4ZGNlYjEtNGNlNS00YjEyLTlmZGYtY2Y4MDUxMWEyMDYzXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg",
-    "https://m.media-amazon.com/images/M/MV5BZDlmNjFkNWUtNDA0Mi00M2I1LWE1MTktMmM5ZTY2OTRlNjEyXkEyXkFqcGdeQXVyMTE0MzQwMjgz._V1_QL75_UX500_CR0,0,500,281_.jpg"];
+    "https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp"];
 
   const navigate = useNavigate();
   const seatPrice = 100;
@@ -112,7 +112,6 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
     const currentDate = new Date();
-    const selectedDateObj = new Date(selectedDate);
     const sevenDaysAhead = new Date();
     sevenDaysAhead.setDate(currentDate.getDate() + 6);
 
@@ -122,6 +121,7 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       alert("Please select a date within the next 7 days.");
       // You can choose to clear the input field or handle it as per your requirements
     }
+    const selectedDateObj = new Date(selectedDate);
   };
 
   return (
