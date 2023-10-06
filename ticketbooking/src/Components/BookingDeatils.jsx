@@ -11,6 +11,7 @@ export const BookingDetails = () => {
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
   const [tid, setTid] = useState('');
   const [selecteddate, setselecteDate]= useState()
+  const [selectedshow, setsSelectedshow] =useState('')
   
   useEffect(() => {
     // Retrieve data from localStorage
@@ -18,6 +19,10 @@ export const BookingDetails = () => {
     setselecteDate(storedData.selectedDate || '')
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
+
+
+    const selectedtime = localStorage.getItem('selectedShowTime')
+    setsSelectedshow(selectedtime)
 
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
@@ -104,7 +109,7 @@ export const BookingDetails = () => {
       <div>
         <h3>Movie Name: Mission Raniganj</h3>
         <h4>
-          Selected  Seats:{' '}
+          Selected Seats:{' '}
           {selectedSeats.map((seatNumber) => (
             <span
               key={seatNumber}
@@ -114,6 +119,7 @@ export const BookingDetails = () => {
             </span>
           ))}
         </h4>
+        <h4>Show Time: {selectedshow}</h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
       <h2>Scan And Pay The Amount</h2>
@@ -121,6 +127,7 @@ export const BookingDetails = () => {
       <br />
       <h4 htmlFor="mobileNumber">Mobile Number</h4>
         <input
+        className='inputmob'
           type="tel"
           placeholder="Enter Mobile Number"
           name="mobileNumber"
@@ -130,7 +137,7 @@ export const BookingDetails = () => {
           required
         />
       <h4 htmlFor="mobileNumber">Enter UPI Ref Number</h4>
-      <input placeholder='Enter 12 Digit UPI Ref No.' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
+      <input className='inputmob' placeholder='Enter 12 Digit UPI Ref No.' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
       <br />
       <button onClick={handlePayment} disabled={!isMobileNumberValid}>
         Enter UPI Reference Number

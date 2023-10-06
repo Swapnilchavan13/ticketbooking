@@ -63,11 +63,11 @@ button {
   margin: auto;
 }
 
-input {
+/* input {
   height: 40px;
   font-size: 15px;
   border-radius: 10px;
-}
+} */
 
 .booked {
   background-color: rgb(88, 88, 88);
@@ -116,6 +116,13 @@ input {
   padding: 30px;
 }
 
+.showtime{
+  border: 1px solid black;
+  margin-bottom: 5px;
+  border-radius: 5px;
+
+}
+
 .dateandshow{
   width: fit-content;
   padding: 50px;
@@ -129,7 +136,7 @@ input {
 
 /* Mobile-responsive styles */
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 680px) {
 
   .seats {
     margin: auto;
@@ -139,6 +146,9 @@ input {
   }
   .seats .column{
     width: fit-content;
+  }
+  #c3{
+    width: 94%;
   }
 
   .seats div {
@@ -154,7 +164,7 @@ input {
   .column {
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 48%;
     gap: 20px;
   }
   
@@ -164,6 +174,7 @@ input {
     width: 140%;
   }
 
+
   .seatindication {
     padding-left: 0;
   }
@@ -171,11 +182,11 @@ input {
   .screen {
     text-align: center;
     margin: auto;
-    width: 136%;
+    width: 138%;
   }
 
   .selected-seats{
-    width: 137%;
+    width: 136%;
   }
 
   .bookbutton {
@@ -200,7 +211,7 @@ input {
   .selectshow{
     border: 1px solid rgb(88, 87, 87);
     padding: 30px;
-    width: 145px;
+    width: 150px;
   }
   
   .dateandshow{
@@ -217,9 +228,14 @@ input {
   .booking-details {
     padding: 15px;
   }
-
-  input {
+.App{
+  margin-left: 10px;
+}
+  .inputmob {
     height: 36px;
     font-size: 14px;
-  }
+  }  
+  .moviename{
+  text-align: center;  
+}
 }

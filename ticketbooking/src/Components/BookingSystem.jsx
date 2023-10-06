@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import logovideo from '../Components'
 import './All.css';
 
 const Seat = ({ seatNumber, isSelected, isBooked, onSelect }) => {
@@ -30,6 +29,37 @@ export const BookingSystem = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
+  
+  
+ /////////show time///////
+ const [selectedShowTime, setSelectedShowTime] = useState(null);
+ const [showTimes, setShowTimes] = useState([
+   { value: "9am", label: "9:00 AM" },
+   { value: "12pm", label: "12:00 PM" },
+   { value: "3pm", label: "3:00 PM" },
+   { value: "6pm", label: "6:00 PM" },
+   { value: "9pm", label: "9:00 PM" },
+ ]);
+
+ useEffect(() => {
+
+    // Disable the radio buttons for show times that have already passed
+    const updatedShowTimes = showTimes.map((time) => {
+      const showTime = new Date()
+      const currentTime = showTime.getHours()-12
+      // console.log(currentTime)
+      time.disabled = time.value[0] <= currentTime;
+      console.log(time)
+      return time;
+    });
+
+   setShowTimes(updatedShowTimes);
+ }, []);
+
+ const handleShowTimeChange = (event) => {
+   setSelectedShowTime(event.target.value);
+ };
+ /////////  
 
   const apiget = [
     'http://62.72.59.146:8000/booked-monday',
@@ -104,6 +134,20 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
 
   const BookTicket = () => {
     // Only navigate to details if at least one seat is selected
+
+    if (selectedShowTime) {
+      // Save the selected show time in local storage
+      localStorage.setItem("selectedShowTime", selectedShowTime);
+
+      // You can also display a confirmation message or perform other actions here
+      alert(`Selected show time: ${selectedShowTime}`);
+    } else {
+      // Handle the case where no show time is selected
+      alert("Please select a show time");
+    }
+    
+
+
     if (selectedSeats.length > 0) {
       navigate('/details');
     }
@@ -134,7 +178,7 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       <br />
       <img src={movie[1]} width={"700px"} alt="" />
       <h2 className="screen">Screen</h2>
-      <h2>Movie Name: {moviename[1]}</h2>    
+      <h2 className='moviename'>Movie Name: {moviename[1]}</h2>    
 
 
       <div className='seatindication'>
@@ -174,7 +218,7 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
     ))}
   <h3>B</h3>
   </div>
-  <div className="column">
+  <div id='c3' className="column">
   <h3>C</h3>
     {[...Array(8).keys()].map((seatNumber) => (
       <Seat
@@ -212,32 +256,35 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       )}
 
 </div>
-      <div className='selectshow'>
-        <h4>Select Show Time</h4>
-        <div className='showtime'>
-        <input type="radio" />
-        <label>9:00 Am</label>
+
+
+
+
+<div className='selectshow'>
+      <h4>Select Show Time</h4>
+      {showTimes.map((time) => (
+        <div className='showtime' key={time.value}>
+          <input
+            type="radio"
+            name="showTime"
+            value={time.value}
+            checked={selectedShowTime === time.value}
+            onChange={handleShowTimeChange}
+            disabled={time.disabled}
+          />
+          <label>{time.label}</label>
         </div>
-        <div className='showtime'>
-        <input type="radio" />
-        <label>12:00 Pm</label>
-        </div>
-        <div className='showtime'>
-        <input type="radio" />
-        <label>3:00 Pm</label>
-        </div>
-        <div className='showtime'>  
-        <input type="radio" />
-        <label>6:00 Pm</label>
-        </div>
-        <div className='showtime'>
-        <input type="radio" />
-        <label>9:00 Pm</label>
-        </div>
-      </div>
+      ))}
+      {/* <button onClick={handleSaveToLocalStorage}>Save to Local Storage</button> */}
+    </div>
+
+
+
+
       
       </div>
       <div className="selected-seats">
+        <h3>Selected Time: {selectedShowTime}</h3>
         <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
         <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
       </div>
