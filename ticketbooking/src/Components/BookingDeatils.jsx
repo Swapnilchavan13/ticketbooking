@@ -61,13 +61,13 @@ export const BookingDetails = () => {
 
     // Define an array of API URLs for each day
     const apiarr = [
-      'http://localhost:8000/book-monday',
-      'http://localhost:8000/book-tuesday',
-      'http://localhost:8000/book-wednesday',
-      'http://localhost:8000/book-thursday',
-      'http://localhost:8000/book-friday',
-      'http://localhost:8000/book-saturday',
-      'http://localhost:8000/book-sunday'
+      'http://62.72.59.146:8000/book-monday',
+      'http://62.72.59.146:8000/book-tuesday',
+      'http://62.72.59.146:8000/book-wednesday',
+      'http://62.72.59.146:8000/book-thursday',
+      'http://62.72.59.146:8000/book-friday',
+      'http://62.72.59.146:8000/book-saturday',
+      'http://62.72.59.146:8000/book-sunday'
     ];
   
     // Define a mapping of day names to their corresponding index

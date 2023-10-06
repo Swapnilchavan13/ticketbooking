@@ -66,13 +66,13 @@ export const BookingSystem = () => {
  /////////  
 
   const apiget = [
-    'http://localhost:8000/booked-monday',
-    'http://localhost:8000/booked-tuesday',
-    'http://localhost:8000/booked-wednesday',
-    'http://localhost:8000/booked-thursday',
-    'http://localhost:8000/booked-friday',
-    'http://localhost:8000/booked-saturday',
-    'http://localhost:8000/booked-sunday'
+    'http://62.72.59.146:8000/booked-monday',
+    'http://62.72.59.146:8000/booked-tuesday',
+    'http://62.72.59.146:8000/booked-wednesday',
+    'http://62.72.59.146:8000/booked-thursday',
+    'http://62.72.59.146:8000/booked-friday',
+    'http://62.72.59.146:8000/booked-saturday',
+    'http://62.72.59.146:8000/booked-sunday'
   ];
   
 
