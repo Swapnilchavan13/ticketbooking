@@ -11,7 +11,7 @@ export const BookingDetails = () => {
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
   const [tid, setTid] = useState('');
   const [selecteddate, setselecteDate]= useState()
-  const [selectedshow, setsSelectedshow] =useState('')
+  const [showTime, setsSelectedshow] =useState('')
   
   useEffect(() => {
     // Retrieve data from localStorage
@@ -61,13 +61,13 @@ export const BookingDetails = () => {
 
     // Define an array of API URLs for each day
     const apiarr = [
-      'http://62.72.59.146:8000/book-monday',
-      'http://62.72.59.146:8000/book-tuesday',
-      'http://62.72.59.146:8000/book-wednesday',
-      'http://62.72.59.146:8000/book-thursday',
-      'http://62.72.59.146:8000/book-friday',
-      'http://62.72.59.146:8000/book-saturday',
-      'http://62.72.59.146:8000/book-sunday'
+      'http://localhost:8000/book-monday',
+      'http://localhost:8000/book-tuesday',
+      'http://localhost:8000/book-wednesday',
+      'http://localhost:8000/book-thursday',
+      'http://localhost:8000/book-friday',
+      'http://localhost:8000/book-saturday',
+      'http://localhost:8000/book-sunday'
     ];
   
     // Define a mapping of day names to their corresponding index
@@ -88,7 +88,7 @@ export const BookingDetails = () => {
       try {
         // Send a POST request to the backend using the selected URL
         await axios.post(apiarr[index], {
-          selectedSeats,
+          selectedSeats,showTime
         });
         
         // Handle payment logic here (e.g., redirect to a payment gateway).
@@ -119,7 +119,7 @@ export const BookingDetails = () => {
             </span>
           ))}
         </h4>
-        <h4>Show Time: {selectedshow}</h4>
+        <h4>Show Time: {showTime}</h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
       <h2>Scan And Pay The Amount</h2>

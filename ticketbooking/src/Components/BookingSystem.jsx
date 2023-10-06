@@ -48,8 +48,8 @@ export const BookingSystem = () => {
       const showTime = new Date()
       const currentTime = showTime.getHours()-12
       // console.log(currentTime)
-      time.disabled = time.value[0] <= currentTime;
-      console.log(time)
+      // time.disabled = time.value[0] <= currentTime;
+      // console.log(time)
       return time;
     });
 
@@ -57,18 +57,22 @@ export const BookingSystem = () => {
  }, []);
 
  const handleShowTimeChange = (event) => {
-   setSelectedShowTime(event.target.value);
- };
+  const newShowTime = event.target.value;
+  setSelectedShowTime(newShowTime);
+
+  // Call the function to fetch booked seats based on the selected showtime
+  fetchBookedSeatsFromAPI(dayy, newShowTime);
+};
  /////////  
 
   const apiget = [
-    'http://62.72.59.146:8000/booked-monday',
-    'http://62.72.59.146:8000/booked-tuesday',
-    'http://62.72.59.146:8000/booked-wednesday',
-    'http://62.72.59.146:8000/booked-thursday',
-    'http://62.72.59.146:8000/booked-friday',
-    'http://62.72.59.146:8000/booked-saturday',
-    'http://62.72.59.146:8000/booked-sunday'
+    'http://localhost:8000/booked-monday',
+    'http://localhost:8000/booked-tuesday',
+    'http://localhost:8000/booked-wednesday',
+    'http://localhost:8000/booked-thursday',
+    'http://localhost:8000/booked-friday',
+    'http://localhost:8000/booked-saturday',
+    'http://localhost:8000/booked-sunday'
   ];
   
 
@@ -76,7 +80,7 @@ export const BookingSystem = () => {
 var dayy = new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
 // console.log(dayy);
 
-const fetchBookedSeatsFromAPI = async (dayy) => {
+const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
   try {
     // Determine the index corresponding to the selected day
     const dayToIndex = {
@@ -93,7 +97,14 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       const index = dayToIndex[dayy];
       const response = await axios.get(apiget[index]);
       const data = response.data;
-      setBookedSeats(data.bookedSeats);
+
+      // Filter booked seats based on the selected showtime
+      const bookedSeatNumbers = data.bookedSeats
+        .filter((seat) => seat.showTime === selectedShowTime)
+        .map((seat) => seat.seatNumber);
+
+      // Update the state with booked seats
+      setBookedSeats(bookedSeatNumbers);
     } else {
       alert('Invalid day selected.');
     }
@@ -132,6 +143,7 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
     }
   };
 
+
   const BookTicket = () => {
     // Only navigate to details if at least one seat is selected
 
@@ -168,6 +180,8 @@ const fetchBookedSeatsFromAPI = async (dayy) => {
       // You can choose to clear the input field or handle it as per your requirements
     }
   };
+
+  
   
 
   return (
