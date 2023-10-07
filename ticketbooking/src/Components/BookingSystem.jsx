@@ -201,6 +201,21 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       // You can choose to clear the input field or handle it as per your requirements
     }
   };
+  
+  var main= []
+  for (let i = 0; i < selectedSeats.length; i++){
+    if(selectedSeats[i]<=6){
+      main.push("A"+selectedSeats[i])
+    }
+    else if(selectedSeats[i]>6 && selectedSeats[i]<14){
+      main.push("B"+selectedSeats[i])
+    }
+    else{
+      main.push("C"+selectedSeats[i])
+    }
+  }
+  
+  console.log(main); // [9, 12, 15, 18]
 
   return (
     <div className="booking-system">
@@ -315,7 +330,7 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
         <h3>Selection :</h3>
         <div className='select'>
         <button>{selectedShowTime}</button>
-        <button>{selectedSeats.join(', ')}</button>
+        <button>{main.join(', ')}</button>
         <button>{new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" })}</button>
         <button>Rs.{calculateTotalPrice()}</button>
         </div>

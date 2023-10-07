@@ -110,7 +110,7 @@ export const BookingDetails = () => {
         <h3>Movie Name: Mission Raniganj</h3>
         <h4>
           Selected Seats:{' '}
-          {selectedSeats.map((seatNumber) => (
+          {selectedSeats.sort((a, b) => a - b).map((seatNumber) => (
             <span
               key={seatNumber}
               className={isSeatBooked(seatNumber) ? 'booked-seat' : ''}

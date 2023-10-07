@@ -127,6 +127,12 @@ width: fit-content;
   border: 3px solid black;
 }
 
+
+/* .App{ */
+  /* border: 20px solid transparent; */
+  /* padding: 10px; */
+  /* border-image: url(https://i.pinimg.com/originals/7c/5a/39/7c5a39387e4d9e430dce774266ee5786.jpg) 100 round; */
+ /* } */
   /* //////////////////////////*/
 
 
@@ -232,6 +238,7 @@ width: fit-content;
     width: 10px;
     height: 15px;
     text-align: center;
+    font-size: 13px;
     gap: 5px;
   }
 
@@ -277,6 +284,8 @@ width: fit-content;
   .selectshow{
     width: 82%;
     padding-top: 0px;
+    /* border: 1px solid red; */
+
   }
   #datePicker{
     width: 98%;
@@ -298,8 +307,9 @@ width: fit-content;
     text-align: center;
     justify-content: center;
   }
-
- 
+  .show{
+    margin-left: -10px;
+  }
 
 .App{
   margin: 5px;
