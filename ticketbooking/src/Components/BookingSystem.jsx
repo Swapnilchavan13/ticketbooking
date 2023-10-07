@@ -20,9 +20,8 @@ const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 
 };
 
 export const BookingSystem = () => {
-  const moviename = ["Tiger 3", "MISSION RANIGANJ"];
-  const movie = ["https://m.media-amazon.com/images/M/MV5BMmI4ZGNlYjEtNGNlNS00YjEyLTlmZGYtY2Y4MDUxMWEyMDYzXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg",
-    "https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp"];
+  const moviename = "MISSION RANIGANJ"
+  const movie = "https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp"
 
   const navigate = useNavigate();
   const seatPrice = 100;
@@ -35,11 +34,11 @@ export const BookingSystem = () => {
 //  const [selectedShowTime, setSelectedShowTime] = useState('defaultTime');
 const [selectedShowTime, setSelectedShowTime] = useState(null);
  const [showTimes, setShowTimes] = useState([
-   { value: "9am", tm:9, label: "9:00 AM" },
-   { value: "12pm", tm:12, label: "12:00 PM" },
-   { value: "3pm", tm:15, label: "3:00 PM" },
-   { value: "6pm", tm:18, label: "6:00 PM" },
-   { value: "9pm", tm:21,label: "9:00 PM" },
+   { value: "9 AM", tm:9, label: "9:00 AM" },
+   { value: "12 PM", tm:12, label: "12:00 PM" },
+   { value: "3 PM", tm:15, label: "3:00 PM" },
+   { value: "6 PM", tm:18, label: "6:00 PM" },
+   { value: "9 PM", tm:21,label: "9:00 PM" },
  ]);
 
   // Find the first non-disabled show time value
@@ -152,7 +151,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
   useEffect(() => {
     const dataToStore = {
       selectedSeats,
-      // selectedDate, // Include selectedDate in localStorage
       totalAmount: calculateTotalPrice(),
     };
     localStorage.setItem('selectedDate', JSON.stringify(selectedDate))
@@ -204,18 +202,15 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
     }
   };
 
-  
-  
-
   return (
     <div className="booking-system">
       <img style={{borderRadius:'20px'}} src={"logogif.gif"} alt="" />
       <br />
       <img src="https://media.istockphoto.com/id/1300788021/vector/box-office-banner-alphabet-sign-marquee-light-bulb-vintage.jpg?s=612x612&w=0&k=20&c=E3RA9XDcx4K9vALeIpL6fF2wqRolNRIBXyi6NNywYko=" alt="" />
       <br />
-      <img src={movie[1]} width={"700px"} alt="" />
+      <img src={movie} width={"700px"} alt="" />
       <h2 className="screen">Screen</h2>
-      <h2 className='moviename'>Movie Name: {moviename[1]}</h2>    
+      <h2 className='moviename'>Movie Name: {moviename}</h2>    
 
 
       <div className='seatindication'>
@@ -276,8 +271,8 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
 <div className='dateandshow'>
 
 <div className='selectdate'>
-<div>
-      <h4 htmlFor="datePicker">Select a Date</h4>
+<div className='selectdateinput'>
+      <label htmlFor="datePicker">Select Date :-</label>
         <input
           type="date"
           id="datePicker"
@@ -285,18 +280,19 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
           onChange={handleDateChange}
         />
       </div>
-      {selectedDate && (
+      {/* {selectedDate && (
         <div className='selectetime'>
           <h4>Selected Date</h4>
           <h5>{selectedDate}</h5>
           <h4>Day: {new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" })}</h4>
         </div>
-      )}
+      )} */}
 </div>
 
 
 <div className='selectshow'>
-      <h4>Select Show Time</h4>
+      <h4>Select Show :-</h4>
+      <div className='show'>
       {showTimes.map((time) => (
         <div className='showtime' key={time.value}>
           <input
@@ -310,15 +306,21 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
           <label>{time.label}</label>
         </div>
       ))}
+      </div>
     </div>
 
 
       </div>
       <div className="selected-seats">
-        <h3>Selected Time: {selectedShowTime}</h3>
-        <h3>Selected Seats: {selectedSeats.join(', ')}</h3>
-        <h3>Total Price: Rs.{calculateTotalPrice()}</h3>
+        <h3>Selection :</h3>
+        <div className='select'>
+        <button>{selectedShowTime}</button>
+        <button>{selectedSeats.join(', ')}</button>
+        <button>{new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" })}</button>
+        <button>Rs.{calculateTotalPrice()}</button>
+        </div>
       </div>
+      <br />
       <button className='bookbutton' onClick={BookTicket} disabled={selectedSeats.length === 0}>
         Book Tickets
       </button>

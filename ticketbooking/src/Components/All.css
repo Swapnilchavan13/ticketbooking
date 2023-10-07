@@ -64,13 +64,13 @@ button {
 }
 
 .booked {
-  background-color: rgb(88, 88, 88);
+  background-color: rgb(184, 7, 7);
   color: white;
   cursor: not-allowed;
 }
 
 .book {
-  background-color: rgb(88, 88, 88);
+  background-color: rgb(187, 7, 7);
   width: 50px;
   height: 40px;
   border: 1px solid black;
@@ -110,18 +110,18 @@ button {
   padding: 30px;
 }
 
-.showtime{
-  border: 1px solid black;
-  margin-bottom: 5px;
-  border-radius: 5px;
-
+.show{
+display: grid;
+grid-template-columns: repeat(3, 100px);
+width: fit-content;
 }
+
 
 .dateandshow{
   width: fit-content;
   padding: 50px;
   margin: auto;
-  display: flex;
+  /* display: flex; */
   gap: 20px;
   text-align: center;
   border: 3px solid black;
@@ -151,6 +151,10 @@ button {
   
   tr:hover {
     background-color: #ddd;
+  }
+
+  .select button{
+    background-color: rgb(243, 236, 228);
   }
 
 
@@ -231,10 +235,6 @@ button {
     gap: 5px;
   }
 
-  /* .selected-seats{
-    width: 136%;
-  } */
-
   .bookbutton {
     width: auto;
     border-radius: 10px;
@@ -260,21 +260,29 @@ button {
   }
   
   .dateandshow{
-    width: 65%;
+    width: 90%;
     padding: 10px;
-    width: fit-content;
+    /* width: fit-content; */
     border: 3px solid black;
     border-radius: 10px;
   }
 
   .selectdate{
-    width: 25%;
+    width: 82%;
+    font-weight: bold;
+  }
+  .selectdate>input{
+    width: 30%;
   }
   .selectshow{
-    width: fit-content;
+    width: 82%;
+    padding-top: 0px;
   }
   #datePicker{
     width: 98%;
+  }
+  .selectshow h4{
+    margin-left: -130px;
   }
 
   .selected-seats{
@@ -283,10 +291,16 @@ button {
     width: 99%;
   }
 
-  .dateandshow{
-    margin: auto;
+  .select{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
     text-align: center;
+    justify-content: center;
   }
+
+ 
+
 .App{
   margin: 5px;
 }
@@ -299,7 +313,6 @@ button {
 }
 
 .booking-details{
-  /* border: 1px solid black; */
   padding: 10px;
   width: 90%;
   border-radius: 10px;
@@ -307,5 +320,10 @@ button {
 .qr{
   width:200px;
   height: 160px;
+}
+
+#datePicker{
+  margin-left: 30px;
+  width: 100px;
 }
 }
