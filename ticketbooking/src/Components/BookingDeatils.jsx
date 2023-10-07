@@ -21,13 +21,11 @@ export const BookingDetails = () => {
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
 
-
     const selectedtime = localStorage.getItem('selectedShowTime')
     setsSelectedshow(selectedtime)
 
     const num= localStorage.getItem('mobilenum')
     setMobnum(num)
-
 
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
@@ -61,8 +59,6 @@ export const BookingDetails = () => {
   
     const selectedDate = new Date(localStorage.getItem('selectedDate'));
     const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-  
-    // console.log(day)
 
     // Define an array of API URLs for each day
     const apiarr = [

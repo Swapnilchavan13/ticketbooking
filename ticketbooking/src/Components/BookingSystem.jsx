@@ -173,11 +173,9 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
 
     localStorage.setItem('mobilenum', JSON.stringify(mobilenum));
 
-
     if (selectedShowTime) {
       // Save the selected show time in local storage
       localStorage.setItem("selectedShowTime", selectedShowTime);
-
       // You can also display a confirmation message or perform other actions here
       alert(`Selected show time: ${selectedShowTime}`);
     } else {
@@ -201,8 +199,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       setSelectedDate(selectedDate);
     } else {
       alert("Please select a date within the next 7 days.");
-      // setSelectedDate(currentDate);
-      // You can choose to clear the input field or handle it as per your requirements
     }
   };
 
@@ -347,9 +343,8 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       ))}
       </div>
     </div>
+    </div>
 
-
-      </div>
       <div className="selected-seats">
         <h3>Selection :</h3>
         <div className='select'>
