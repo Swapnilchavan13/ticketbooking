@@ -32,29 +32,38 @@ export const BookingSystem = () => {
   
   
  /////////show time///////
- const [selectedShowTime, setSelectedShowTime] = useState(null);
+//  const [selectedShowTime, setSelectedShowTime] = useState('defaultTime');
  const [showTimes, setShowTimes] = useState([
-   { value: "9am", label: "9:00 AM" },
-   { value: "12pm", label: "12:00 PM" },
-   { value: "3pm", label: "3:00 PM" },
-   { value: "6pm", label: "6:00 PM" },
-   { value: "9pm", label: "9:00 PM" },
+   { value: "9am", tm:9, label: "9:00 AM" },
+   { value: "12pm", tm:12, label: "12:00 PM" },
+   { value: "3pm", tm:15, label: "3:00 PM" },
+   { value: "6pm", tm:18, label: "6:00 PM" },
+   { value: "9pm", tm:21,label: "9:00 PM" },
  ]);
+
+  // Find the first non-disabled show time value
+  const firstNonDisabledShowTime = showTimes.find((time) => !time.disabled);
+  console.log(firstNonDisabledShowTime.value)
 
  useEffect(() => {
 
     // Disable the radio buttons for show times that have already passed
     const updatedShowTimes = showTimes.map((time) => {
       const showTime = new Date()
-      const currentTime = showTime.getHours()-12
+      const currentTime = showTime.getHours()
       // console.log(currentTime)
-      // time.disabled = time.value[0] <= currentTime;
-      // console.log(time)
+      time.disabled = time.tm <= currentTime;
+      console.log(time)
       return time;
     });
 
    setShowTimes(updatedShowTimes);
- }, []);
+ }, [firstNonDisabledShowTime]);
+
+
+  // Set selectedShowTime to the value of the first non-disabled show time, or null if none are available
+  const [selectedShowTime, setSelectedShowTime] = useState(firstNonDisabledShowTime.value);
+ 
 
  const handleShowTimeChange = (event) => {
   const newShowTime = event.target.value;
@@ -201,12 +210,14 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
         <label htmlFor="">Available Seats</label>
         <div className='available'></div>
       </div>
+      <br />
 
 <div className="seats">
   <div className="column">
     <h3>A</h3>
     {[...Array(6).keys()].map((seatNumber) => (
       <Seat
+        id='seat'
         key={seatNumber}
         seatNumber={(seatNumber + 1)}
         isSelected={selectedSeats.includes(seatNumber + 1)}
@@ -216,7 +227,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       />
     ))}
     <h3>A</h3>
-
   </div>
   <div className="column">
   <h3>B</h3>
@@ -262,16 +272,13 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
         />
       </div>
       {selectedDate && (
-        <div>
+        <div className='selectetime'>
           <h4>Selected Date</h4>
           <h5>{selectedDate}</h5>
           <h4>Day: {new Date(selectedDate).toLocaleDateString("en-US", { weekday: "long" })}</h4>
         </div>
       )}
-
 </div>
-
-
 
 
 <div className='selectshow'>
@@ -289,13 +296,9 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
           <label>{time.label}</label>
         </div>
       ))}
-      {/* <button onClick={handleSaveToLocalStorage}>Save to Local Storage</button> */}
     </div>
 
 
-
-
-      
       </div>
       <div className="selected-seats">
         <h3>Selected Time: {selectedShowTime}</h3>

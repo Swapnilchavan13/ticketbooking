@@ -63,12 +63,6 @@ button {
   margin: auto;
 }
 
-/* input {
-  height: 40px;
-  font-size: 15px;
-  border-radius: 10px;
-} */
-
 .booked {
   background-color: rgb(88, 88, 88);
   color: white;
@@ -133,6 +127,35 @@ button {
   border: 3px solid black;
 }
 
+  /* //////////////////////////*/
+
+
+  /* Add these styles to your CSS file or component */
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+
+
+/* /////////////////////// */
+
 
 /* Mobile-responsive styles */
 
@@ -147,8 +170,19 @@ button {
   .seats .column{
     width: fit-content;
   }
+  
   #c3{
     width: 94%;
+  }
+
+  .book{
+    width: 30px;
+    height: 30px;
+  }
+
+  .available{
+    width: 30px;
+    height: 30px;
   }
 
   .seats div {
@@ -171,9 +205,8 @@ button {
   img{
     text-align: center;
     justify-content: center;
-    width: 140%;
+    width: 100%;
   }
-
 
   .seatindication {
     padding-left: 0;
@@ -182,12 +215,25 @@ button {
   .screen {
     text-align: center;
     margin: auto;
-    width: 138%;
+    width: 98%;
   }
 
-  .selected-seats{
-    width: 136%;
+  .column{
+    height: 40px;
+    gap:8px;
+    width: 300px;
   }
+
+  .column div{
+    width: 10px;
+    height: 15px;
+    text-align: center;
+    gap: 5px;
+  }
+
+  /* .selected-seats{
+    width: 136%;
+  } */
 
   .bookbutton {
     width: auto;
@@ -196,7 +242,6 @@ button {
     color: black;
     background-color: rgb(138, 233, 138);
     padding: 7px;
-    margin-left: 150px;
   }
 
   table {
@@ -215,21 +260,35 @@ button {
   }
   
   .dateandshow{
+    width: 65%;
+    padding: 10px;
     width: fit-content;
-    padding: 50px;
-    margin: auto;
-    display: flex;
-    gap: 20px;
-    text-align: center;
     border: 3px solid black;
     border-radius: 10px;
   }
 
-  .booking-details {
-    padding: 15px;
+  .selectdate{
+    width: 25%;
+  }
+  .selectshow{
+    width: fit-content;
+  }
+  #datePicker{
+    width: 98%;
+  }
+
+  .selected-seats{
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 99%;
+  }
+
+  .dateandshow{
+    margin: auto;
+    text-align: center;
   }
 .App{
-  margin-left: 10px;
+  margin: 5px;
 }
   .inputmob {
     height: 36px;
@@ -237,5 +296,16 @@ button {
   }  
   .moviename{
   text-align: center;  
+}
+
+.booking-details{
+  /* border: 1px solid black; */
+  padding: 10px;
+  width: 90%;
+  border-radius: 10px;
+}
+.qr{
+  width:200px;
+  height: 160px;
 }
 }
