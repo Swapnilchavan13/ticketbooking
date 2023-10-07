@@ -12,6 +12,7 @@ export const BookingDetails = () => {
   const [tid, setTid] = useState('');
   const [selecteddate, setselecteDate]= useState()
   const [showTime, setsSelectedshow] =useState('')
+  const [mobNum, setMobnum] = useState('')
   
   useEffect(() => {
     // Retrieve data from localStorage
@@ -23,6 +24,10 @@ export const BookingDetails = () => {
 
     const selectedtime = localStorage.getItem('selectedShowTime')
     setsSelectedshow(selectedtime)
+
+    const num= localStorage.getItem('mobilenum')
+    setMobnum(num)
+
 
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
@@ -88,7 +93,7 @@ export const BookingDetails = () => {
       try {
         // Send a POST request to the backend using the selected URL
         await axios.post(apiarr[index], {
-          selectedSeats,showTime
+          selectedSeats,showTime, mobNum
         });
         
         // Handle payment logic here (e.g., redirect to a payment gateway).

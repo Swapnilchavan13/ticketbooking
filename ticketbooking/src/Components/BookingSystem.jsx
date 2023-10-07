@@ -28,6 +28,7 @@ export const BookingSystem = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
+  const [mobilenum, setMobilenum] = useState('');
   
   
  /////////show time///////
@@ -170,6 +171,9 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
   const BookTicket = () => {
     // Only navigate to details if at least one seat is selected
 
+    localStorage.setItem('mobilenum', JSON.stringify(mobilenum));
+
+
     if (selectedShowTime) {
       // Save the selected show time in local storage
       localStorage.setItem("selectedShowTime", selectedShowTime);
@@ -201,8 +205,16 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       // You can choose to clear the input field or handle it as per your requirements
     }
   };
+
+    // Handle changes in the mobile number input
+    const handleMobileNumberChange = (e) => {
+      const newMobilenum = e.target.value;
+      setMobilenum(newMobilenum);
+    };
+
+
   
-  var main= []
+  const main= []
   for (let i = 0; i < selectedSeats.length; i++){
     if(selectedSeats[i]<=6){
       main.push("A"+selectedSeats[i])
@@ -214,8 +226,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       main.push("C"+selectedSeats[i])
     }
   }
-  
-  console.log(main); // [9, 12, 15, 18]
 
   return (
     <div className="booking-system">
@@ -284,6 +294,20 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
 <br />
 
 <div className='dateandshow'>
+
+  <div>
+    <label className='datePicker'>Mobile Number :- </label>
+    <input
+        className='inputmob'
+          type="tel"
+          placeholder="Enter Mobile Number"
+          name="mobileNumber"
+          id="mobileNumber"
+          onChange={handleMobileNumberChange}
+          value={mobilenum}
+          required
+        />
+  </div><br />
 
 <div className='selectdate'>
 <div className='selectdateinput'>
