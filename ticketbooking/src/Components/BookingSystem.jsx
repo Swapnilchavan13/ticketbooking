@@ -33,6 +33,7 @@ export const BookingSystem = () => {
   
  /////////show time///////
 //  const [selectedShowTime, setSelectedShowTime] = useState('defaultTime');
+const [selectedShowTime, setSelectedShowTime] = useState(null);
  const [showTimes, setShowTimes] = useState([
    { value: "9am", tm:9, label: "9:00 AM" },
    { value: "12pm", tm:12, label: "12:00 PM" },
@@ -43,17 +44,18 @@ export const BookingSystem = () => {
 
   // Find the first non-disabled show time value
   const firstNonDisabledShowTime = showTimes.find((time) => !time.disabled);
-  console.log(firstNonDisabledShowTime.value)
+  // console.log(firstNonDisabledShowTime.value)
 
  useEffect(() => {
 
+   setSelectedShowTime(firstNonDisabledShowTime.value)
     // Disable the radio buttons for show times that have already passed
     const updatedShowTimes = showTimes.map((time) => {
       const showTime = new Date()
       const currentTime = showTime.getHours()
       // console.log(currentTime)
       time.disabled = time.tm <= currentTime;
-      console.log(time)
+      // console.log(time)
       return time;
     });
 
@@ -62,7 +64,6 @@ export const BookingSystem = () => {
 
 
   // Set selectedShowTime to the value of the first non-disabled show time, or null if none are available
-  const [selectedShowTime, setSelectedShowTime] = useState(firstNonDisabledShowTime.value);
  
 
  const handleShowTimeChange = (event) => {
@@ -166,8 +167,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       // Handle the case where no show time is selected
       alert("Please select a show time");
     }
-    
-
 
     if (selectedSeats.length > 0) {
       navigate('/details');
