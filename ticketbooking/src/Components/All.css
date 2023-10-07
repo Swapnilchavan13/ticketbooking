@@ -116,17 +116,14 @@ grid-template-columns: repeat(3, 100px);
 width: fit-content;
 }
 
-
 .dateandshow{
   width: fit-content;
   padding: 50px;
   margin: auto;
-  /* display: flex; */
   gap: 20px;
   text-align: center;
   border: 3px solid black;
 }
-
 
 /* .App{ */
   /* border: 20px solid transparent; */
@@ -134,8 +131,6 @@ width: fit-content;
   /* border-image: url(https://i.pinimg.com/originals/7c/5a/39/7c5a39387e4d9e430dce774266ee5786.jpg) 100 round; */
  /* } */
   /* //////////////////////////*/
-
-
   /* Add these styles to your CSS file or component */
 
   table {
@@ -330,6 +325,10 @@ width: fit-content;
 .qr{
   width:200px;
   height: 160px;
+}
+
+.select button{
+font-size: 15px;
 }
 
 #datePicker{
