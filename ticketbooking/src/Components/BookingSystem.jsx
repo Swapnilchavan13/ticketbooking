@@ -48,23 +48,37 @@ const [selectedShowTime, setSelectedShowTime] = useState(null);
 
  useEffect(() => {
 
-   setSelectedShowTime(firstNonDisabledShowTime.value)
+  // console.log()
+  // console.log(selectedDate)
+  setSelectedShowTime(firstNonDisabledShowTime.value)
+
+  // Check if the selected date matches the current date
+  if (
+    selectedDate ===
+    new Date().toISOString().slice(0, 10)
+  ) {
     // Disable the radio buttons for show times that have already passed
     const updatedShowTimes = showTimes.map((time) => {
-      const showTime = new Date()
-      const currentTime = showTime.getHours()
-      // console.log(currentTime)
+      const showTime = new Date();
+      const currentTime = showTime.getHours();
       time.disabled = time.tm <= currentTime;
-      // console.log(time)
       return time;
     });
 
-   setShowTimes(updatedShowTimes);
- }, [firstNonDisabledShowTime]);
+    setShowTimes(updatedShowTimes);
+  } else {
+    // If the dates don't match, reset the disabled flag for all show times
+    const updatedShowTimes = showTimes.map((time) => {
+      time.disabled = false;
+      return time;
+    });
 
+    setShowTimes(updatedShowTimes);
+  }
+
+ }, [firstNonDisabledShowTime,selectedDate]);
 
   // Set selectedShowTime to the value of the first non-disabled show time, or null if none are available
- 
 
  const handleShowTimeChange = (event) => {
   const newShowTime = event.target.value;
@@ -73,6 +87,7 @@ const [selectedShowTime, setSelectedShowTime] = useState(null);
   // Call the function to fetch booked seats based on the selected showtime
   fetchBookedSeatsFromAPI(dayy, newShowTime);
 };
+
  /////////  
 
   const apiget = [
@@ -125,8 +140,8 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
   // Call the function to fetch booked seats from the API on component mount
   useEffect(() => {
     // Replace 'selectedDay' with the actual selected day from your state
-    fetchBookedSeatsFromAPI(dayy);
-  }, [selectedDate]);
+    fetchBookedSeatsFromAPI(dayy, selectedShowTime);
+  }, [selectedDate, selectedShowTime]);
 
 
   const calculateTotalPrice = () => {
