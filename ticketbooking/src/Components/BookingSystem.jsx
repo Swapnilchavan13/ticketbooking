@@ -28,7 +28,7 @@ export const BookingSystem = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
-  const [mobilenum, setMobilenum] = useState('');
+  const [mobilenum, setMobilenum] = useState(null);
   
   
  /////////show time///////
@@ -207,8 +207,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       const newMobilenum = e.target.value;
       setMobilenum(newMobilenum);
     };
-
-
   
   const main= []
   for (let i = 0; i < selectedSeats.length; i++){
@@ -290,7 +288,6 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
 <br />
 
 <div className='dateandshow'>
-
   <div>
     <label className='datePicker'>Mobile Number :- </label>
     <input

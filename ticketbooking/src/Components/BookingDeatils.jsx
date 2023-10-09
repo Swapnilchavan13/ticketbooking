@@ -6,7 +6,6 @@ export const BookingDetails = () => {
   const navigate = useNavigate();
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [bookedSeats, setBookedSeats] = useState([]);
   const [mobileNumber, setMobileNumber] = useState('');
   const [isMobileNumberValid, setIsMobileNumberValid] = useState(false); // Add state for mobile number validity
   const [tid, setTid] = useState('');
@@ -14,6 +13,7 @@ export const BookingDetails = () => {
   const [showTime, setsSelectedshow] =useState('')
   const [mobNum, setMobnum] = useState('')
   
+  const [bookedSeats, setBookedSeats] = useState([]);
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
@@ -88,17 +88,26 @@ export const BookingDetails = () => {
       
       try {
         // Send a POST request to the backend using the selected URL
-        await axios.post(apiarr[index], {
-          selectedSeats,showTime, mobNum
+        const response = await axios.post(apiarr[index], {
+          selectedSeats,
+          showTime,
+          mobNum
         });
-        
-        // Handle payment logic here (e.g., redirect to a payment gateway).
-        alert('Tickets Booked');
-        navigate('/notification');
+      
+        if (response.data.success) {
+          // Booking was successful
+          alert('Tickets Booked');
+          navigate('/notification');
+        } else {
+          // Tickets are already booked
+          alert(response.data.message);
+          navigate('/')
+        }
       } catch (error) {
         console.error('Error booking tickets:', error);
         alert('Failed to book tickets. Please try again later.');
       }
+      
     } else {
       alert('Invalid day selected.');
     }
