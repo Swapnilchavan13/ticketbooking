@@ -20,16 +20,15 @@ const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 
 };
 
 export const BookingSystem = () => {
-  const moviename = "MISSION RANIGANJ"
-  const movie = "https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp"
-
+  const moviename = ["MISSION RANIGANJ", "Fukrey 3"]
+  const movie = ["https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp","https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
   const navigate = useNavigate();
   const seatPrice = 100;
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState( new Date().toISOString().slice(0, 10)); // Add selected date state variable
   const [mobilenum, setMobilenum] = useState(null);
-  
+  const [inx, setInx] = useState(0)
   
  /////////show time///////
 //  const [selectedShowTime, setSelectedShowTime] = useState('defaultTime');
@@ -173,19 +172,23 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
 
     localStorage.setItem('mobilenum', JSON.stringify(mobilenum));
 
-    if (selectedShowTime) {
-      // Save the selected show time in local storage
-      localStorage.setItem("selectedShowTime", selectedShowTime);
-      // You can also display a confirmation message or perform other actions here
-      alert(`Selected show time: ${selectedShowTime}`);
-    } else {
-      // Handle the case where no show time is selected
-      alert("Please select a show time");
+    if(mobilenum){
+      if (selectedShowTime) {
+        // Save the selected show time in local storage
+        localStorage.setItem("selectedShowTime", selectedShowTime);
+        // You can also display a confirmation message or perform other actions here
+        alert(`Selected show time: ${selectedShowTime}`);
+      } else {
+        // Handle the case where no show time is selected
+        alert("Please select a show time");
+      }
+      if (selectedSeats.length > 0) {
+        navigate('/details');
+      }
     }
-
-    if (selectedSeats.length > 0) {
-      navigate('/details');
-    }
+    else{
+      alert("Please Enter Mobile Number")
+    } 
   };
 
   const handleDateChange = (e) => {
@@ -194,6 +197,15 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
     const selectedDateObj = new Date(selectedDate);
     const sevenDaysAhead = new Date();
     sevenDaysAhead.setDate(currentDate.getDate() + 6);
+
+    console.log(selectedDate)
+
+    if(selectedDate > "2023-10-13"){
+      setInx(1)
+    }
+    else{
+      setInx(0)
+    }
   
     if (selectedDateObj >= currentDate && selectedDateObj <= sevenDaysAhead) {
       setSelectedDate(selectedDate);
@@ -227,10 +239,9 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       <br />
       <img src="https://media.istockphoto.com/id/1300788021/vector/box-office-banner-alphabet-sign-marquee-light-bulb-vintage.jpg?s=612x612&w=0&k=20&c=E3RA9XDcx4K9vALeIpL6fF2wqRolNRIBXyi6NNywYko=" alt="" />
       <br />
-      <img src={movie} width={"700px"} alt="" />
+      <img src={movie[inx]} width={"700px"} alt="" />
       <h2 className="screen">Screen</h2>
-      <h2 className='moviename'>Movie Name: {moviename}</h2>    
-
+      <h2 className='moviename'>Movie Name: {moviename[inx]}</h2>    
 
       <div className='seatindication'>
         <label htmlFor="">Booked Seats</label>
