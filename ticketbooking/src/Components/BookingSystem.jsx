@@ -195,7 +195,7 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
     const sevenDaysAhead = new Date();
     sevenDaysAhead.setDate(currentDate.getDate() + 6);
 
-    if(selectedDate > "2023-10-13"){
+    if(selectedDate > "2023-10-12"){
       setInx(1)
     }
     else{

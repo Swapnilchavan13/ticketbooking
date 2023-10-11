@@ -12,6 +12,7 @@ export const BookingDetails = () => {
   const [selecteddate, setselecteDate]= useState()
   const [showTime, setsSelectedshow] =useState('')
   const [mobNum, setMobnum] = useState('')
+  const [sdate, setSdate] = useState('')
 
   const moviename = ["MISSION RANIGANJ", "Fukrey 3"]
   const movie = ["https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp","https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
@@ -19,6 +20,7 @@ export const BookingDetails = () => {
  
   
   const [bookedSeats, setBookedSeats] = useState([]);
+
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = JSON.parse(localStorage.getItem('bookingData') || '{}');
@@ -26,16 +28,13 @@ export const BookingDetails = () => {
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
 
-
     const selectedDate = new Date(localStorage.getItem('selectedDate'));
     const year = selectedDate.getFullYear();
     const month = String(selectedDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
     const day = String(selectedDate.getDate()).padStart(2, '0');
-
     const formattedDate = `${year}-${month}-${day}`;
-    // console.log(formattedDate);
 
-    if(formattedDate > "2023-10-13"){
+    if(formattedDate > "2023-10-12"){
       setInx(1)
     }
     else{
@@ -47,6 +46,10 @@ export const BookingDetails = () => {
 
     const num= localStorage.getItem('mobilenum')
     setMobnum(num)
+
+    const sdate= localStorage.getItem('selectedDate')
+    setSdate(sdate)
+    console.log(sdate)
 
     // Retrieve booked seats from localStorage
     const storedBookedSeats = JSON.parse(localStorage.getItem('bookedSeats') || '[]');
@@ -113,7 +116,8 @@ export const BookingDetails = () => {
         const response = await axios.post(apiarr[index], {
           selectedSeats,
           showTime,
-          mobNum
+          mobNum,
+          sdate
         });
       
         if (response.data.success) {
@@ -151,7 +155,7 @@ export const BookingDetails = () => {
             </span>
           ))}
         </h4>
-        {/* <h4>Show Date: {selecteddate}</h4> */}
+        <h4>Show Date: {sdate}</h4>
         <h4>Show Time: {showTime}</h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
