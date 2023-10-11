@@ -146,12 +146,12 @@ export const BookingDetails = () => {
           onChange={handleMobileNumberChange}
           required
         />
-      <h4 htmlFor="mobileNumber">Enter UPI Ref Number</h4>
+      {/* <h4 htmlFor="mobileNumber">Enter UPI Ref Number</h4>
       <input className='inputmob' placeholder='Enter 12 Digit UPI Ref No.' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
-      <br />
-      <button onClick={handlePayment} disabled={!isMobileNumberValid}>
+      <br /> */}
+      {/* <button onClick={handlePayment} disabled={!isMobileNumberValid}>
         Enter UPI Reference Number
-      </button>
+      </button> */}
     </div>
   );
 };
