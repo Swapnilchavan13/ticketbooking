@@ -209,6 +209,7 @@ const fetchBookedSeatsFromAPI = async (dayy, selectedShowTime) => {
       setSelectedDate(selectedDate);
     } else {
       alert("Please select a date within the next 7 days.");
+      window.location.href = window.location.href;
     }
   };
 
