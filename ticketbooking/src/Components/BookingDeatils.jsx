@@ -151,11 +151,12 @@ export const BookingDetails = () => {
             </span>
           ))}
         </h4>
+        {/* <h4>Show Date: {selecteddate}</h4> */}
         <h4>Show Time: {showTime}</h4>
         <h3>Total Amount: Rs.{totalAmount}</h3>
       </div>
       <h2>Scan And Pay The Amount</h2>
-      <img className='qr' src={"qrcode.jpg"} alt="img" />
+      <img className='qr' src={"qrcode.jpeg"} alt="img" />
       <br />
       <h4 htmlFor="mobileNumber">Mobile Number</h4>
         <input

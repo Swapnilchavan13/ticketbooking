@@ -78,7 +78,6 @@ const [selectedShowTime, setSelectedShowTime] = useState(null);
  }, [firstNonDisabledShowTime,selectedDate]);
 
   // Set selectedShowTime to the value of the first non-disabled show time, or null if none are available
-
  const handleShowTimeChange = (event) => {
   const newShowTime = event.target.value;
   setSelectedShowTime(newShowTime);
@@ -86,8 +85,6 @@ const [selectedShowTime, setSelectedShowTime] = useState(null);
   // Call the function to fetch booked seats based on the selected showtime
   fetchBookedSeatsFromAPI(dayy, newShowTime);
 };
-
- /////////  
 
   const apiget = [
     'http://62.72.59.146:8000/booked-monday',
