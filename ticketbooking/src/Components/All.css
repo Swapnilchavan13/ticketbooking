@@ -95,8 +95,8 @@ button {
 }
 
 .qr {
-  height: 600px;
-  width: 340px;
+  height: 300px;
+  width: 400px;
 }
 
 
@@ -324,7 +324,7 @@ width: fit-content;
 }
 .qr{
   width:200px;
-  height: 160px;
+  height: 240px;
 }
 
 .select button{
