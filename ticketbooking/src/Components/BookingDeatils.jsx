@@ -12,6 +12,11 @@ export const BookingDetails = () => {
   const [selecteddate, setselecteDate]= useState()
   const [showTime, setsSelectedshow] =useState('')
   const [mobNum, setMobnum] = useState('')
+
+  const moviename = ["MISSION RANIGANJ", "Fukrey 3"]
+  const movie = ["https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp","https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
+  const [inx, setInx] = useState(0)
+ 
   
   const [bookedSeats, setBookedSeats] = useState([]);
   useEffect(() => {
@@ -20,6 +25,22 @@ export const BookingDetails = () => {
     setselecteDate(storedData.selectedDate || '')
     setSelectedSeats(storedData.selectedSeats || []);
     setTotalAmount(storedData.totalAmount || 0);
+
+
+    const selectedDate = new Date(localStorage.getItem('selectedDate'));
+    const year = selectedDate.getFullYear();
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    const day = String(selectedDate.getDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}`;
+    // console.log(formattedDate);
+
+    if(formattedDate > "2023-10-13"){
+      setInx(1)
+    }
+    else{
+      setInx(0)
+    }
 
     const selectedtime = localStorage.getItem('selectedShowTime')
     setsSelectedshow(selectedtime)
@@ -59,6 +80,7 @@ export const BookingDetails = () => {
   
     const selectedDate = new Date(localStorage.getItem('selectedDate'));
     const day = selectedDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+   
 
     // Define an array of API URLs for each day
     const apiarr = [
@@ -117,7 +139,7 @@ export const BookingDetails = () => {
     <div className="booking-details">
       <h2>Booking Details</h2>
       <div>
-        <h3>Movie Name: Mission Raniganj</h3>
+        <h3>Movie Name: {moviename[inx]}</h3>
         <h4>
           Selected Seats:{' '}
           {selectedSeats.sort((a, b) => a - b).map((seatNumber) => (
@@ -149,9 +171,12 @@ export const BookingDetails = () => {
       {/* <h4 htmlFor="mobileNumber">Enter UPI Ref Number</h4>
       <input className='inputmob' placeholder='Enter 12 Digit UPI Ref No.' onChange={(e) => setTid(e.target.value)} value={tid} type="number" /><br />
       <br /> */}
-      {/* <button onClick={handlePayment} disabled={!isMobileNumberValid}>
-        Enter UPI Reference Number
-      </button> */}
+      <br />
+      <br />
+
+      <button onClick={handlePayment} disabled={!isMobileNumberValid}>
+        Pay And Submit
+      </button>
     </div>
   );
 };
