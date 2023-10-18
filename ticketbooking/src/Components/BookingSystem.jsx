@@ -20,8 +20,8 @@ const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 
 };
 
 export const BookingSystem = () => {
-  const moviename = ["MISSION RANIGANJ", "Fukrey 3"]
-  const movie = ["https://www.jagranimages.com/images/newimg/06092023/06_09_2023-mission_raniganj_23523460.webp","https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
+  const moviename = ["Fukrey 3"]
+  const movie = ["https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
   const navigate = useNavigate();
   const seatPrice = 100;
   const [selectedSeats, setSelectedSeats] = useState([]);
