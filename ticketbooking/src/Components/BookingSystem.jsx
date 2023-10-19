@@ -20,8 +20,8 @@ const seatClassName = isSelected ? 'seat selected' : isBooked ? 'seat booked' : 
 };
 
 export const BookingSystem = () => {
-  const moviename = ["Fukrey 3"]
-  const movie = ["https://cdn.dnaindia.com/sites/default/files/styles/full/public/2023/06/13/2594649-dna.jpg?im=Resize=(640,360)"]
+  const moviename = ["Ganpath"]
+  const movie = ["https://i.postimg.cc/Pfpy5b5g/Ganapath.jpg"]
   const navigate = useNavigate();
   const seatPrice = 100;
   const [selectedSeats, setSelectedSeats] = useState([]);

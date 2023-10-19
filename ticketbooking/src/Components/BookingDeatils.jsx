@@ -143,7 +143,7 @@ export const BookingDetails = () => {
     <div className="booking-details">
       <h2>Booking Details</h2>
       <div>
-        <h3>Movie Name: {moviename[inx]}</h3>
+        <h3>Movie Name: Ganpath</h3>
         <h4>
           Selected Seats:{' '}
           {selectedSeats.sort((a, b) => a - b).map((seatNumber) => (
